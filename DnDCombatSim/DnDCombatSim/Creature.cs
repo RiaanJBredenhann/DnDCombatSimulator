@@ -52,5 +52,24 @@ namespace DnDCombatSim
             this._armourClass = AC;
         }
 
+        public void AttackWithWeapon()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CastASpell()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HealAlly()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HealSelf()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DnDCombatSim
+namespace DnDCombatSim_Console
 {
     internal interface IAction
     {
-        void AttackWithWeapon();
-        void CastASpell();
+        void AttackWithWeapon(Creature c);
+        void CastASpell(Creature c);
     }
 }

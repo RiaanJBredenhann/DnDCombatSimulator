@@ -10,7 +10,5 @@ namespace DnDCombatSim
     {
         void HealSelf();
         void HealAlly();
-        void AttackWithWeapon();
-        void CastASpell();
     }
 }
