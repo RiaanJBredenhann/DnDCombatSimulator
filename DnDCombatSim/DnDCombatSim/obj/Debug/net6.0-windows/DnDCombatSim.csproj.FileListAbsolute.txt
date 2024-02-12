@@ -1,0 +1,4 @@
+C:\Users\Riaan HP\Documents\Personal\Projects\D&D Combat Simulator\DnDCombatSim\DnDCombatSim\obj\Debug\net6.0-windows\MainWindow.g.cs
+C:\Users\Riaan HP\Documents\Personal\Projects\D&D Combat Simulator\DnDCombatSim\DnDCombatSim\obj\Debug\net6.0-windows\App.g.cs
+C:\Users\Riaan HP\Documents\Personal\Projects\D&D Combat Simulator\DnDCombatSim\DnDCombatSim\obj\Debug\net6.0-windows\DnDCombatSim_MarkupCompile.cache
+C:\Users\Riaan HP\Documents\Personal\Projects\D&D Combat Simulator\DnDCombatSim\DnDCombatSim\obj\Debug\net6.0-windows\DnDCombatSim_MarkupCompile.lref
