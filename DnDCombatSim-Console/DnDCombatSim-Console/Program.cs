@@ -4,45 +4,77 @@
     {
         static void Main(string[] args)
         {
+            //-- Creating Lists for the players and monsters
+            //-- Player and Monster are subclasses of Creature and are seperated into different Lists
+            //   since Players can only attack Monsters and vice versa
             List<Player> players = new List<Player>();
             List<Monster> monsters = new List<Monster>();
-            List<Weapon> weapons = new List<Weapon>();
+            List<Creature> initiativeOrder = new List<Creature>();
 
             Player Bjorn = new Player("Bjorn", 2, 8, 10, 16, 12, 10, 13, 10, 14, 'M');
-            weapons.Add(new Weapon("Longbow", "1d10"));
-            weapons.Add(new Weapon("Dagger", "1d4"));
-            Bjorn.SetWeapons(weapons);
-            weapons.Clear();
+            Bjorn.SetWeapons();
             players.Add(Bjorn);
+            initiativeOrder.Add(Bjorn);
 
             Player Peul = new Player("Peul", 2, 10, 16, 10, 12, 8, 10, 12, 17, 'M');
-            weapons.Add(new Weapon("Longsword", "1d10"));
-            weapons.Add(new Weapon("Dagger", "1d4"));
-            Peul.SetWeapons(weapons);
-            weapons.Clear();
+            Peul.SetWeapons();
             players.Add(Peul);
+            initiativeOrder.Add(Peul);
 
             Player Yonaka = new Player("Yonaka", 2, 12, 17, 12, 14, 8, 10, 12, 15, 'M');
-            weapons.Add(new Weapon("Katana", "1d18"));
-            weapons.Add(new Weapon("Dagger", "1d4"));
-            Yonaka.SetWeapons(weapons);
-            weapons.Clear();
+            Yonaka.SetWeapons();
             players.Add(Yonaka);
+            initiativeOrder.Add(Yonaka);
 
             for (int i = 1; i <= 3; i++ )
             {
                 Monster Monster = new Monster("Goblin", 2, 6, 12, 10, 8, 6, 7, 9, 12, i);
                 monsters.Add(Monster);
+                initiativeOrder.Add(Monster);
             }
 
-            foreach (Player player in players)
+            foreach (Creature c in initiativeOrder)
             {
-                Console.WriteLine($"{player.GetName()} has the following weapons:");
-                player.GetWeapons();
-                Console.WriteLine();
+                c.RollInitiative();
             }
+
+            initiativeOrder = SortInitiative(initiativeOrder);
+
+            foreach (Creature c in initiativeOrder)
+            {
+                Console.WriteLine($"{c.GetName()}    {c.GetInitiative()}");
+            }
+
 
              
         }
+
+        public static List<Creature> SortInitiative(List<Creature> creatures)
+        {
+            bool sorted = false;
+            Creature temp;
+
+            while (!sorted)
+            {
+                sorted = true;
+
+                for (int i = 0; i < creatures.Count; i++)
+                {
+                    if (i < creatures.Count - 1)
+                    {
+                        if (creatures[i].GetInitiative() < creatures[i + 1].GetInitiative())
+                        {
+                            temp = creatures[i];
+                            creatures[i] = creatures[i + 1];
+                            creatures[i + 1] = temp;
+
+                            sorted = false;
+                        }
+                    }
+                }
+            }
+            return creatures;
+        }
+
     }
 }

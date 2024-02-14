@@ -21,15 +21,21 @@ namespace DnDCombatSim_Console
 
         // Ability Stats
         private int _strength;
+        private int _strengthModifier;
         private int _dexterity;
+        private int _dexterityModifier;
         private int _constitution;
+        private int _constitutionModifier;
         private int _intelligence;
+        private int _intelligenceModifier;
         private int _wisdom;
+        private int _wisdomModifier;
         private int _charisma;
+        private int _charismaModifier;
 
         // Combat Stats
         private int _armourClass;
-        private int initiative;
+        private int _initiative;
 
         // Weapons
         protected List<Weapon> _weapons;
@@ -54,11 +60,17 @@ namespace DnDCombatSim_Console
             this._maxHealthPoints = maxHP;
             this._currentHealthPoints = maxHP;
             this._strength = str;
+            this._strengthModifier = (str - 10) / 2;
             this._dexterity = dex;
+            this._dexterityModifier = (dex - 10) / 2;
             this._constitution = con;
+            this._constitutionModifier = (con - 10) / 2;
             this._intelligence = intl;
+            this._intelligenceModifier = (intl - 10) / 2;
             this._wisdom = wis;
+            this._wisdomModifier = (wis - 10) / 2;
             this._charisma = cha;
+            this._charismaModifier = (cha - 10) / 2;
             this._armourClass = AC;
 
             _items = new List<Item>();
@@ -69,24 +81,41 @@ namespace DnDCombatSim_Console
         //                                  CLASS METHODS
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
 
+        public void RollInitiative()
+        {
+            Random random = new Random();
+
+            this._initiative = random.Next(1, 21) + this._dexterityModifier; 
+        }
+
         protected virtual int GetID()
         {
             return 0;
         }
 
-        public List<Item> GetItems()
-        {
-            return this._items;
-        }
-
-        public void SetItems(Item item)
-        {
-            _items.Add(item);
-        }
-
         public string GetName()
         {
             return this._name;
+        }
+
+        public int GetInitiative()
+        {
+            return this._initiative;
+        }
+
+        public void GetWeapons()
+        {
+            foreach (Weapon weapon in this._weapons)
+            {
+                Console.WriteLine(weapon.GetName());
+            }
+        }
+
+        public void SetWeapons()
+        {
+            this._weapons.Add(new Weapon("Dagger", "1d4"));
+            this._weapons.Add(new Weapon("Longbow", "1d10"));
+            this._weapons.Add(new Weapon("Longsword", "1d10"));
         }
 
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //

@@ -17,23 +17,7 @@ namespace DnDCombatSim_Console
         {
             this._type = type;
         }
-
-        public string GetWeapons()
-        {
-            foreach (Weapon weapon in this._weapons)
-            {
-                return weapon.GetName();
-            }
-            return "";
-        }
-
-        public void SetWeapons(List<Weapon> weapons)
-        {
-            foreach (Weapon weapon in weapons)
-            {
-                this._weapons.Add(weapon);
-            }
-        }
+        
 
     }
 }
