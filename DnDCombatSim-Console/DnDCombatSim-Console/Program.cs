@@ -45,8 +45,12 @@
             {
                 Console.WriteLine($"{c.GetName()}    {c.GetInitiative()}");
             }
+            Console.WriteLine();
 
-            Bjorn.AttackWithWeapon(players, monsters);
+            foreach (Creature c in initiativeOrder)
+            {
+                c.AttackWithWeapon(players, monsters);
+            }
              
         }
 

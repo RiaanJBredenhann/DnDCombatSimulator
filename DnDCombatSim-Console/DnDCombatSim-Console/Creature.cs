@@ -95,7 +95,7 @@ namespace DnDCombatSim_Console
             this._initiative = random.Next(1, 21) + this._dexterityModifier; 
         }
 
-        private void TakeDamage(Weapon weapon)
+        private int TakeDamage(Weapon weapon)
         {
             Random r = new Random();
 
@@ -103,11 +103,15 @@ namespace DnDCombatSim_Console
             int indexOfD = damageDice.IndexOf('d');
             int numberOfDice = int.Parse(damageDice.Substring(0, indexOfD));
             int typeOfDice = int.Parse(damageDice.Substring(indexOfD+1));
+            int totalDamage = 0;
 
             for (int i = numberOfDice; i <= numberOfDice; i++)
             {
-                this._currentHitPoints -= r.Next(1, typeOfDice + 1);
-            } 
+                totalDamage += r.Next(1, typeOfDice + 1);
+            }
+
+            this._currentHitPoints -= totalDamage;
+            return totalDamage;
         }
 
         protected virtual int GetID()
@@ -158,20 +162,26 @@ namespace DnDCombatSim_Console
                 target = players[r.Next(0, players.Count)];
 
             Weapon chosenWeapon = this._weapons[r.Next(0, this._weapons.Count)];
+
+            Console.WriteLine($"{this.GetName()} is attacking {target.GetName()} with a {chosenWeapon.GetName()}");
             this.RollAttack(target, chosenWeapon);
-
-            Console.WriteLine($"{chosenWeapon.GetName()}");
-
-            Console.WriteLine(target.GetMaxHitPoints());
-            Console.WriteLine(target.GetCurrentHitPoints());
         }
 
         public void RollAttack(Creature target, Weapon chosenWeapon)
         {
             Random r = new Random();
+            int attackRoll = r.Next(1, 21) + this._proficiencyModifier;
+            int totalDamage = 0;
 
-            if (r.Next(1, 21) + this._proficiencyModifier >= target._armourClass)
-                target.TakeDamage(chosenWeapon);
+            if (attackRoll >= target._armourClass)
+            {
+                totalDamage = target.TakeDamage(chosenWeapon);
+                Console.WriteLine($"{this.GetName()} rolled {attackRoll} and hit {target.GetName()} for {totalDamage} damage \n");
+            }
+            else
+            {
+                Console.WriteLine($"{this.GetName()} rolled {attackRoll} and missed {target.GetName()} \n");
+            }
         }
 
         public void CastASpell(List<Player> players, List<Monster> monsters)
