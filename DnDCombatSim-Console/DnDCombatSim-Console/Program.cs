@@ -11,24 +11,25 @@
             List<Monster> monsters = new List<Monster>();
             List<Creature> initiativeOrder = new List<Creature>();
 
-            Player Bjorn = new Player("Bjorn", 2, 8, 10, 16, 12, 10, 13, 10, 14, 'M');
+            Player Bjorn = new Player("Bjorn", 2, 8, 'P', 10, 16, 12, 10, 13, 10, 14, 'M');
             Bjorn.SetWeapons();
             players.Add(Bjorn);
             initiativeOrder.Add(Bjorn);
 
-            Player Peul = new Player("Peul", 2, 10, 16, 10, 12, 8, 10, 12, 17, 'M');
+            Player Peul = new Player("Peul", 2, 10, 'P', 16, 10, 12, 8, 10, 12, 17, 'M');
             Peul.SetWeapons();
             players.Add(Peul);
             initiativeOrder.Add(Peul);
 
-            Player Yonaka = new Player("Yonaka", 2, 12, 17, 12, 14, 8, 10, 12, 15, 'M');
+            Player Yonaka = new Player("Yonaka", 2, 12, 'P', 17, 12, 14, 8, 10, 12, 15, 'M');
             Yonaka.SetWeapons();
             players.Add(Yonaka);
             initiativeOrder.Add(Yonaka);
 
             for (int i = 1; i <= 3; i++ )
             {
-                Monster Monster = new Monster("Goblin", 2, 6, 12, 10, 8, 6, 7, 9, 12, i);
+                Monster Monster = new Monster("Goblin", 2, 6, 'M', 12, 10, 8, 6, 7, 9, 12, i);
+                Monster.SetWeapons();
                 monsters.Add(Monster);
                 initiativeOrder.Add(Monster);
             }
@@ -45,9 +46,13 @@
                 Console.WriteLine($"{c.GetName()}    {c.GetInitiative()}");
             }
 
-
+            Bjorn.AttackWithWeapon(players, monsters);
              
         }
+
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
+        //                                  CLASS METHODS
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
 
         public static List<Creature> SortInitiative(List<Creature> creatures)
         {
@@ -75,6 +80,9 @@
             }
             return creatures;
         }
+
+
+
 
     }
 }

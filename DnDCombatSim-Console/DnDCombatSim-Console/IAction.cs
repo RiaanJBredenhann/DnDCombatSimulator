@@ -8,7 +8,7 @@ namespace DnDCombatSim_Console
 {
     internal interface IAction
     {
-        void AttackWithWeapon(Creature c);
-        void CastASpell(Creature c);
+        void AttackWithWeapon(List<Player> players, List<Monster> monsters);
+        void CastASpell(List<Player> players, List<Monster> monsters);
     }
 }

@@ -16,8 +16,9 @@ namespace DnDCombatSim_Console
         // Details
         private string _name;
         private int _proficiencyModifier;
-        private int _currentHealthPoints;
-        private int _maxHealthPoints;
+        private int _currentHitPoints;
+        private int _maxHitPoints;
+        private char _creatureType;
 
         // Ability Stats
         private int _strength;
@@ -53,24 +54,25 @@ namespace DnDCombatSim_Console
 
         public Creature() { }
 
-        public Creature(string name, int profMod, int maxHP, int str, int dex, int con, int intl, int wis, int cha, int AC)
+        public Creature(string name, int profMod, int maxHP, char creatureType, int str, int dex, int con, int intl, int wis, int cha, int AC)
         {
             this._name = name;
             this._proficiencyModifier = profMod;
-            this._maxHealthPoints = maxHP;
-            this._currentHealthPoints = maxHP;
+            this._maxHitPoints = maxHP;
+            this._currentHitPoints = maxHP;
+            this._creatureType = creatureType;
             this._strength = str;
-            this._strengthModifier = (str - 10) / 2;
+            this._strengthModifier = CalculateModifier(str);
             this._dexterity = dex;
-            this._dexterityModifier = (dex - 10) / 2;
+            this._dexterityModifier = CalculateModifier(dex);
             this._constitution = con;
-            this._constitutionModifier = (con - 10) / 2;
+            this._constitutionModifier = CalculateModifier(con);
             this._intelligence = intl;
-            this._intelligenceModifier = (intl - 10) / 2;
+            this._intelligenceModifier = CalculateModifier(intl);
             this._wisdom = wis;
-            this._wisdomModifier = (wis - 10) / 2;
+            this._wisdomModifier = CalculateModifier(wis);
             this._charisma = cha;
-            this._charismaModifier = (cha - 10) / 2;
+            this._charismaModifier = CalculateModifier(cha);
             this._armourClass = AC;
 
             _items = new List<Item>();
@@ -81,11 +83,31 @@ namespace DnDCombatSim_Console
         //                                  CLASS METHODS
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
 
+        private int CalculateModifier(int abilityScore)
+        {
+            return (abilityScore - 10) / 2;
+        }
+
         public void RollInitiative()
         {
             Random random = new Random();
 
             this._initiative = random.Next(1, 21) + this._dexterityModifier; 
+        }
+
+        private void TakeDamage(Weapon weapon)
+        {
+            Random r = new Random();
+
+            string damageDice = weapon.GetDamageDice();
+            int indexOfD = damageDice.IndexOf('d');
+            int numberOfDice = int.Parse(damageDice.Substring(0, indexOfD));
+            int typeOfDice = int.Parse(damageDice.Substring(indexOfD+1));
+
+            for (int i = numberOfDice; i <= numberOfDice; i++)
+            {
+                this._currentHitPoints -= r.Next(1, typeOfDice + 1);
+            } 
         }
 
         protected virtual int GetID()
@@ -98,17 +120,19 @@ namespace DnDCombatSim_Console
             return this._name;
         }
 
+        public int GetCurrentHitPoints()
+        {
+            return this._currentHitPoints;
+        }
+
+        public int GetMaxHitPoints()
+        {
+            return this._maxHitPoints;
+        }
+
         public int GetInitiative()
         {
             return this._initiative;
-        }
-
-        public void GetWeapons()
-        {
-            foreach (Weapon weapon in this._weapons)
-            {
-                Console.WriteLine(weapon.GetName());
-            }
         }
 
         public void SetWeapons()
@@ -122,14 +146,35 @@ namespace DnDCombatSim_Console
         //                                 INTERFACE METHODS
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
 
-        public void AttackWithWeapon(Creature c)
+        public void AttackWithWeapon(List<Player> players, List<Monster> monsters)
         {
             //throw new NotImplementedException();
+            Random r = new Random();
+            Creature target;
 
-            Console.WriteLine($"{this._name} attacked {c._name} {c.GetID()}");
+            if (this._creatureType == 'P')
+                target = monsters[r.Next(0, monsters.Count)];
+            else
+                target = players[r.Next(0, players.Count)];
+
+            Weapon chosenWeapon = this._weapons[r.Next(0, this._weapons.Count)];
+            this.RollAttack(target, chosenWeapon);
+
+            Console.WriteLine($"{chosenWeapon.GetName()}");
+
+            Console.WriteLine(target.GetMaxHitPoints());
+            Console.WriteLine(target.GetCurrentHitPoints());
         }
 
-        public void CastASpell(Creature c)
+        public void RollAttack(Creature target, Weapon chosenWeapon)
+        {
+            Random r = new Random();
+
+            if (r.Next(1, 21) + this._proficiencyModifier >= target._armourClass)
+                target.TakeDamage(chosenWeapon);
+        }
+
+        public void CastASpell(List<Player> players, List<Monster> monsters)
         {
             throw new NotImplementedException();
         }

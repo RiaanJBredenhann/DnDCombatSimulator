@@ -20,8 +20,8 @@ namespace DnDCombatSim_Console
 
         public Monster() { }
 
-        public Monster(string name, int profMod, int maxHP, int str, int dex, int con, int intl, int wis, int cha, int AC, int id)
-            : base(name, profMod, maxHP, str, dex, con, intl, wis, cha, AC)
+        public Monster(string name, int profMod, int maxHP, char creatureType, int str, int dex, int con, int intl, int wis, int cha, int AC, int id)
+            : base(name, profMod, maxHP,creatureType, str, dex, con, intl, wis, cha, AC)
         {
             this._id = id;
         }

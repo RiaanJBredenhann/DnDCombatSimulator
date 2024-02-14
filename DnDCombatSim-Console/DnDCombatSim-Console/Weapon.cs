@@ -29,5 +29,10 @@ namespace DnDCombatSim_Console
         {
 
         }
+
+        public string GetDamageDice()
+        {
+            return this._damageDice;
+        }
     }
 }
