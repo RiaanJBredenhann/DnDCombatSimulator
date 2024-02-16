@@ -19,6 +19,7 @@ namespace DnDCombatSim_Console
         private int _currentHitPoints;
         private int _maxHitPoints;
         private char _creatureType;
+        private bool _isDead;
 
         // Ability Stats
         private int _strength;
@@ -61,6 +62,7 @@ namespace DnDCombatSim_Console
             this._maxHitPoints = maxHP;
             this._currentHitPoints = maxHP;
             this._creatureType = creatureType;
+            this._isDead = false;
             this._strength = str;
             this._strengthModifier = CalculateModifier(str);
             this._dexterity = dex;
@@ -95,11 +97,35 @@ namespace DnDCombatSim_Console
             this._initiative = random.Next(1, 21) + this._dexterityModifier; 
         }
 
-        private int TakeDamage(Weapon weapon)
+        public Creature ChooseTarget(Creature target, List<Player> players, List<Monster> monsters)
+        {
+            Random r = new Random();
+            bool dead = true;
+
+            if (this._creatureType == 'P')
+            {
+                while (dead)
+                {
+                    target = monsters[r.Next(0, monsters.Count)];
+                    dead = target.GetIsDead();
+                }
+            }
+            else
+            {
+                while (dead)
+                {
+                    target = players[r.Next(0, players.Count)];
+                    dead = target.GetIsDead();
+                }
+            }
+            return target;
+        }
+
+        private int TakeDamage(Weapon chosenWeapon)
         {
             Random r = new Random();
 
-            string damageDice = weapon.GetDamageDice();
+            string damageDice = chosenWeapon.GetDamageDice();
             int indexOfD = damageDice.IndexOf('d');
             int numberOfDice = int.Parse(damageDice.Substring(0, indexOfD));
             int typeOfDice = int.Parse(damageDice.Substring(indexOfD+1));
@@ -114,14 +140,19 @@ namespace DnDCombatSim_Console
             return totalDamage;
         }
 
-        protected virtual int GetID()
+        public void Kill(List<Creature> initiativeOrder, List<Player> players, List<Monster> monsters)
         {
-            return 0;
+
         }
 
         public string GetName()
         {
             return this._name;
+        }
+
+        protected virtual int GetID()
+        {
+            return 0;
         }
 
         public int GetCurrentHitPoints()
@@ -132,6 +163,21 @@ namespace DnDCombatSim_Console
         public int GetMaxHitPoints()
         {
             return this._maxHitPoints;
+        }
+
+        public char GetCreatureType()
+        {
+            return this._creatureType;
+        }
+
+        public bool GetIsDead()
+        {
+            return this._isDead;
+        }
+
+        public void SetIsDead(bool isDead)
+        {
+            this._isDead = isDead;
         }
 
         public int GetInitiative()
@@ -154,34 +200,42 @@ namespace DnDCombatSim_Console
         {
             //throw new NotImplementedException();
             Random r = new Random();
-            Creature target;
+            Creature target = new Creature();
+            bool hit;
+            int totalDamage;
 
-            if (this._creatureType == 'P')
-                target = monsters[r.Next(0, monsters.Count)];
-            else
-                target = players[r.Next(0, players.Count)];
+            target = this.ChooseTarget(target, players, monsters);
 
             Weapon chosenWeapon = this._weapons[r.Next(0, this._weapons.Count)];
 
-            Console.WriteLine($"{this.GetName()} is attacking {target.GetName()} with a {chosenWeapon.GetName()}");
-            this.RollAttack(target, chosenWeapon);
+            Console.WriteLine($"{this.GetName()} {this.GetID()} is attacking {target.GetName()} {target.GetID()} with a {chosenWeapon.GetName()}");
+            hit = this.RollAttack(target);
+
+            if (hit)
+            {
+                totalDamage = target.TakeDamage(chosenWeapon);
+                Console.Write($" for {totalDamage} damage \n");
+
+                if (target._currentHitPoints <= 0)
+                {
+                    Console.WriteLine($"{this.GetName()} {this.GetID()} killed {target.GetName()} {target.GetID()} \n");
+                    target._isDead = true;
+                }
+            }
         }
 
-        public void RollAttack(Creature target, Weapon chosenWeapon)
+        public bool RollAttack(Creature target)
         {
             Random r = new Random();
             int attackRoll = r.Next(1, 21) + this._proficiencyModifier;
-            int totalDamage = 0;
 
             if (attackRoll >= target._armourClass)
             {
-                totalDamage = target.TakeDamage(chosenWeapon);
-                Console.WriteLine($"{this.GetName()} rolled {attackRoll} and hit {target.GetName()} for {totalDamage} damage \n");
+                Console.WriteLine($"{this.GetName()} {this.GetID()} rolled {attackRoll} and hit {target.GetName()} {target.GetID()}");
+                return true;
             }
-            else
-            {
-                Console.WriteLine($"{this.GetName()} rolled {attackRoll} and missed {target.GetName()} \n");
-            }
+            Console.WriteLine($"{this.GetName()} rolled {attackRoll} and missed {target.GetName()} \n");
+            return false;
         }
 
         public void CastASpell(List<Player> players, List<Monster> monsters)

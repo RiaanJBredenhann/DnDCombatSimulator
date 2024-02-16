@@ -47,11 +47,70 @@
             }
             Console.WriteLine();
 
-            foreach (Creature c in initiativeOrder)
+            int playerWins = 0;
+            int monsterWins = 0;
+            int roundCounter = 0;
+            int deadPlayers = 0;
+            int deadMonsters = 0;
+
+            for (int i = 1; i <= 10; i++)
             {
-                c.AttackWithWeapon(players, monsters);
+                roundCounter = 0;
+                ResetIsDead(initiativeOrder);
+
+                while (players.Count >= deadPlayers && monsters.Count >= deadMonsters)
+                {
+                    roundCounter++;
+                    deadPlayers = 0;
+                    deadMonsters = 0;
+
+                    Console.WriteLine($"========== ROUND {roundCounter} ========== \n");
+
+                    foreach (Creature c in initiativeOrder)
+                    {
+                        if (!c.GetIsDead())
+                            c.AttackWithWeapon(players, monsters);
+                        else
+                            Console.WriteLine($"{c.GetName()} is dead \n");
+                    }
+
+                    deadPlayers = CheckDeadPlayers(players);
+                    deadMonsters = CheckDeadMonsters(monsters);
+                }
+
+                Console.WriteLine();
+
+                if (monsters.Count == 0)
+                {
+                    Console.WriteLine("Players Won! \n");
+                    playerWins++;
+
+                    Console.WriteLine("Survivors \n");
+                    foreach (Player p in players)
+                    {
+                        Console.WriteLine(p.GetName());
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Monsters Won! \n");
+                    monsterWins++;
+
+                    Console.WriteLine("Survivors \n");
+                    foreach (Monster m in monsters)
+                    {
+                        Console.WriteLine(m.GetName());
+                    }
+                }
             }
-             
+
+            Console.WriteLine();
+            Console.WriteLine($"Players won {playerWins} out of 10 simulations");
+            Console.WriteLine($"Monsters won {monsterWins} out of 10 simulations");
+
+
+
+
         }
 
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
@@ -85,8 +144,36 @@
             return creatures;
         }
 
+        public static void ResetIsDead(List<Creature> initiativeOrder)
+        {
+            foreach (Creature c in initiativeOrder)
+            {
+                c.SetIsDead(false);
+            }
+        }
 
+        public static int CheckDeadPlayers(List<Player> players)
+        {
+            int deadCreatures = 0;
 
+            foreach (Player p in players)
+            {
+                if (p.GetIsDead())
+                    deadCreatures++;
+            }
+            return deadCreatures;
+        }
 
+        public static int CheckDeadMonsters(List<Monster> monsters)
+        {
+            int deadCreatures = 0;
+
+            foreach (Monster m in monsters)
+            {
+                if (m.GetIsDead())
+                    deadCreatures++;
+            }
+            return deadCreatures;
+        }
     }
 }
