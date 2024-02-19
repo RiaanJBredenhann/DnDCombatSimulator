@@ -102,23 +102,29 @@ namespace DnDCombatSim_Console
             Random r = new Random();
             bool dead = true;
 
-            if (this._creatureType == 'P')
+            while (dead)
             {
-                while (dead)
-                {
+                if (this._creatureType == 'P')
                     target = monsters[r.Next(0, monsters.Count)];
-                    dead = target.GetIsDead();
-                }
-            }
-            else
-            {
-                while (dead)
-                {
+                else
                     target = players[r.Next(0, players.Count)];
-                    dead = target.GetIsDead();
-                }
+                dead = target.GetIsDead();
             }
             return target;
+        }
+
+        public bool RollAttack(Creature target)
+        {
+            Random r = new Random();
+            int attackRoll = r.Next(1, 21) + this._proficiencyModifier;
+
+            if (attackRoll >= target._armourClass)
+            {
+                Console.Write($"{this.GetName()} {this.GetID()} rolled {attackRoll} and hit {target.GetName()} {target.GetID()}");
+                return true;
+            }
+            Console.WriteLine($"{this.GetName()} {this.GetID()} rolled {attackRoll} and missed {target.GetName()} {target.GetID()} \n");
+            return false;
         }
 
         private int TakeDamage(Weapon chosenWeapon)
@@ -144,6 +150,10 @@ namespace DnDCombatSim_Console
         {
 
         }
+
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
+        //                       CLASS METHODS - GETTERS AND SETTERS
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
 
         public string GetName()
         {
@@ -199,9 +209,9 @@ namespace DnDCombatSim_Console
         public void AttackWithWeapon(List<Player> players, List<Monster> monsters)
         {
             //throw new NotImplementedException();
+            Console.WriteLine("Enter AttackWithWeapon()");
             Random r = new Random();
             Creature target = new Creature();
-            bool hit;
             int totalDamage;
 
             target = this.ChooseTarget(target, players, monsters);
@@ -209,9 +219,8 @@ namespace DnDCombatSim_Console
             Weapon chosenWeapon = this._weapons[r.Next(0, this._weapons.Count)];
 
             Console.WriteLine($"{this.GetName()} {this.GetID()} is attacking {target.GetName()} {target.GetID()} with a {chosenWeapon.GetName()}");
-            hit = this.RollAttack(target);
 
-            if (hit)
+            if (this.RollAttack(target))
             {
                 totalDamage = target.TakeDamage(chosenWeapon);
                 Console.Write($" for {totalDamage} damage \n");
@@ -222,20 +231,6 @@ namespace DnDCombatSim_Console
                     target._isDead = true;
                 }
             }
-        }
-
-        public bool RollAttack(Creature target)
-        {
-            Random r = new Random();
-            int attackRoll = r.Next(1, 21) + this._proficiencyModifier;
-
-            if (attackRoll >= target._armourClass)
-            {
-                Console.WriteLine($"{this.GetName()} {this.GetID()} rolled {attackRoll} and hit {target.GetName()} {target.GetID()}");
-                return true;
-            }
-            Console.WriteLine($"{this.GetName()} rolled {attackRoll} and missed {target.GetName()} \n");
-            return false;
         }
 
         public void CastASpell(List<Player> players, List<Monster> monsters)

@@ -49,7 +49,7 @@
 
             int playerWins = 0;
             int monsterWins = 0;
-            int roundCounter = 0;
+            int roundCounter;
             int deadPlayers = 0;
             int deadMonsters = 0;
 
@@ -68,19 +68,26 @@
 
                     foreach (Creature c in initiativeOrder)
                     {
+                        Console.WriteLine($"Current Creature: {c.GetName()}");
+
                         if (!c.GetIsDead())
+                        {
+                            Console.WriteLine("enter if c.getisdead");
                             c.AttackWithWeapon(players, monsters);
+                        }   
                         else
                             Console.WriteLine($"{c.GetName()} is dead \n");
                     }
 
                     deadPlayers = CheckDeadPlayers(players);
+                    Console.WriteLine($"deadPlayers: {deadPlayers}");
                     deadMonsters = CheckDeadMonsters(monsters);
+                    Console.WriteLine($"deadMonsters: {deadMonsters}");
                 }
 
                 Console.WriteLine();
 
-                if (monsters.Count == 0)
+                if (deadMonsters  == 0)
                 {
                     Console.WriteLine("Players Won! \n");
                     playerWins++;
