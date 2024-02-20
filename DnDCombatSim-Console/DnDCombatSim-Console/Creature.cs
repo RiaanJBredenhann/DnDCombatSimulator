@@ -100,18 +100,15 @@ namespace DnDCombatSim_Console
         public Creature ChooseTarget(Creature target, List<Player> players, List<Monster> monsters)
         {
             Random r = new Random();
-            bool dead = true;
 
-            while (dead)
-            {
-                if (this._creatureType == 'P')
-                    target = monsters[r.Next(0, monsters.Count)];
-                else
-                    target = players[r.Next(0, players.Count)];
-                dead = target.GetIsDead();
-            }
+            if (this._creatureType == 'P')
+                target = monsters[r.Next(0, monsters.Count)];
+            else
+                target = players[r.Next(0, players.Count)];
+
             return target;
         }
+        
 
         public bool RollAttack(Creature target)
         {
@@ -146,8 +143,21 @@ namespace DnDCombatSim_Console
             return totalDamage;
         }
 
-        public void Kill(List<Creature> initiativeOrder, List<Player> players, List<Monster> monsters)
+        public void Kill(Creature target, List<Player> players, List<Monster> monsters, List<Creature> deadCreatures)
         {
+            Console.WriteLine($"{this.GetName()} {this.GetID()} killed {target.GetName()} {target.GetID()} \n");
+            target._isDead = true;
+
+            if (target.GetCreatureType() == 'P')
+            {
+                players.Remove((Player)target);
+                deadCreatures.Add(target);
+            }
+            else
+            {
+                monsters.Remove((Monster)target);
+                deadCreatures.Add(target);
+            }
 
         }
 
@@ -206,10 +216,9 @@ namespace DnDCombatSim_Console
         //                                 INTERFACE METHODS
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
 
-        public void AttackWithWeapon(List<Player> players, List<Monster> monsters)
+        public void AttackWithWeapon(List<Player> players, List<Monster> monsters, List<Creature> deadCreatures)
         {
             //throw new NotImplementedException();
-            Console.WriteLine("Enter AttackWithWeapon()");
             Random r = new Random();
             Creature target = new Creature();
             int totalDamage;
@@ -226,10 +235,7 @@ namespace DnDCombatSim_Console
                 Console.Write($" for {totalDamage} damage \n");
 
                 if (target._currentHitPoints <= 0)
-                {
-                    Console.WriteLine($"{this.GetName()} {this.GetID()} killed {target.GetName()} {target.GetID()} \n");
-                    target._isDead = true;
-                }
+                    this.Kill(target, players, monsters, deadCreatures);
             }
         }
 

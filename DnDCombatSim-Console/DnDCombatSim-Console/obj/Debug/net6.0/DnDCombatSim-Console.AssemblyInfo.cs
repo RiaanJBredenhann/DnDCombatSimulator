@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DnDCombatSim-Console")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+16dae3ecf8f6985f39b3251d4aa8b6dba96f6a75")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4643cfc814da2870d46bd0ce43f94d6acb025ace")]
 [assembly: System.Reflection.AssemblyProductAttribute("DnDCombatSim-Console")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DnDCombatSim-Console")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

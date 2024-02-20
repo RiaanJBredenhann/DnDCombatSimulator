@@ -9,6 +9,7 @@
             //   since Players can only attack Monsters and vice versa
             List<Player> players = new List<Player>();
             List<Monster> monsters = new List<Monster>();
+            List<Creature> deadCreatures = new List<Creature>();
             List<Creature> initiativeOrder = new List<Creature>();
 
             Player Bjorn = new Player("Bjorn", 2, 8, 'P', 10, 16, 12, 10, 13, 10, 14, 'M');
@@ -34,13 +35,17 @@
                 initiativeOrder.Add(Monster);
             }
 
+            // Here we set the initiativescore of every Creature in the simulation         
             foreach (Creature c in initiativeOrder)
             {
                 c.RollInitiative();
             }
 
+            // And here we order the Creatures by their initiative score
+            // Creatures take their turns in order of their initiative score
             initiativeOrder = SortInitiative(initiativeOrder);
 
+            // Here we display all the Creatures in the simulation and their initiative score
             foreach (Creature c in initiativeOrder)
             {
                 Console.WriteLine($"{c.GetName()}    {c.GetInitiative()}");
@@ -48,46 +53,53 @@
             Console.WriteLine();
 
             int playerWins = 0;
-            int monsterWins = 0;
             int roundCounter;
-            int deadPlayers = 0;
-            int deadMonsters = 0;
 
-            for (int i = 1; i <= 10; i++)
+            // Here is the simulation loop
+            // The simulation runs 100 times, where every loop contains another loop for a single fight, where every creature
+            // performs and Action and a Bonus Action
+            //    We randomly decide whether the active Creature takes an Action or a Bonus Action as well as which Action or Bonus Action
+            // After the active Creature took its turn we check to see if either side of the fight is completely dead
+            //    If so, we break out of the fight loop and check the winner of the fight
+            // Once we incremented the corrosponding counter for either Player wins or Monster wins, we continue the simulation
+
+            // Smulation Loop
+            // Runs 100 times
+            for (int i = 1; i <= 100; i++)
             {
+                Console.WriteLine( "\n========================================");
+                Console.WriteLine($"            SIMULATION {i}");
+                Console.WriteLine( "========================================\n");
+
                 roundCounter = 0;
+                ResetCreatures(players, monsters, deadCreatures);
                 ResetIsDead(initiativeOrder);
 
-                while (players.Count >= deadPlayers && monsters.Count >= deadMonsters)
+                // Combat Loop
+                // Runs a variable amount of times, until one side of the fight is wiped out
+                while (players.Count > 0 && monsters.Count > 0)
                 {
                     roundCounter++;
-                    deadPlayers = 0;
-                    deadMonsters = 0;
 
-                    Console.WriteLine($"========== ROUND {roundCounter} ========== \n");
+                    Console.WriteLine($"     ========== ROUND {roundCounter} ========== \n");
 
                     foreach (Creature c in initiativeOrder)
                     {
-                        Console.WriteLine($"Current Creature: {c.GetName()}");
-
                         if (!c.GetIsDead())
                         {
-                            Console.WriteLine("enter if c.getisdead");
-                            c.AttackWithWeapon(players, monsters);
+                            c.AttackWithWeapon(players, monsters, deadCreatures);
+
+                            if (players.Count == 0 || monsters.Count == 0)
+                                break;
                         }   
                         else
-                            Console.WriteLine($"{c.GetName()} is dead \n");
+                            Console.WriteLine($"{c.GetName()} is dead and can't attack \n");
                     }
-
-                    deadPlayers = CheckDeadPlayers(players);
-                    Console.WriteLine($"deadPlayers: {deadPlayers}");
-                    deadMonsters = CheckDeadMonsters(monsters);
-                    Console.WriteLine($"deadMonsters: {deadMonsters}");
                 }
 
                 Console.WriteLine();
 
-                if (deadMonsters  == 0)
+                if (monsters.Count == 0)
                 {
                     Console.WriteLine("Players Won! \n");
                     playerWins++;
@@ -101,7 +113,6 @@
                 else
                 {
                     Console.WriteLine("Monsters Won! \n");
-                    monsterWins++;
 
                     Console.WriteLine("Survivors \n");
                     foreach (Monster m in monsters)
@@ -111,12 +122,12 @@
                 }
             }
 
-            Console.WriteLine();
-            Console.WriteLine($"Players won {playerWins} out of 10 simulations");
-            Console.WriteLine($"Monsters won {monsterWins} out of 10 simulations");
+            Console.WriteLine("\n   ==============================\n");
+            Console.WriteLine($"Players won {playerWins} out of 100 simulations");
+            Console.WriteLine($"Monsters won {100 - playerWins} out of 100 simulations");
 
-
-
+            DetermineDifficulty(playerWins);
+            Console.WriteLine("\n   ==============================\n");
 
         }
 
@@ -159,28 +170,40 @@
             }
         }
 
-        public static int CheckDeadPlayers(List<Player> players)
+        public static void ResetCreatures(List<Player> players, List<Monster> monsters, List<Creature> deadCreatures)
         {
-            int deadCreatures = 0;
-
-            foreach (Player p in players)
+            foreach (Creature c in deadCreatures)
             {
-                if (p.GetIsDead())
-                    deadCreatures++;
+                if (c.GetCreatureType() == 'P')
+                    players.Add((Player)c);
+                else 
+                    monsters.Add((Monster)c);
             }
-            return deadCreatures;
+            deadCreatures.Clear();
         }
 
-        public static int CheckDeadMonsters(List<Monster> monsters)
+        public static void DetermineDifficulty(int playerWins)
         {
-            int deadCreatures = 0;
-
-            foreach (Monster m in monsters)
+            Console.Write("\nCombat Difficulty: ");
+            switch (playerWins)
             {
-                if (m.GetIsDead())
-                    deadCreatures++;
+                case int i when i >= 0 && i < 20:
+                    Console.Write("Deadly");
+                    break;
+                case int i when i >= 20 && i < 40:
+                    Console.Write("Very Hard");
+                    break;
+                case int i when i >= 40 && i < 60:
+                    Console.Write("Hard");
+                    break;
+                case int i when i >= 60 && i < 80:
+                    Console.Write("Medium");
+                    break;
+                case int i when i >= 80 && i <= 100:
+                    Console.Write("Easy");
+                    break;
             }
-            return deadCreatures;
+            Console.WriteLine();   
         }
     }
 }
