@@ -120,7 +120,7 @@ namespace DnDCombatSim_Console
                 Console.Write($"{this.GetName()} {this.GetID()} rolled {attackRoll} and hit {target.GetName()} {target.GetID()}");
                 return true;
             }
-            Console.WriteLine($"{this.GetName()} {this.GetID()} rolled {attackRoll} and missed {target.GetName()} {target.GetID()} \n");
+            Console.WriteLine($"{this.GetName()} {this.GetID()} rolled {attackRoll} and missed {target.GetName()} {target.GetID()}");
             return false;
         }
 
@@ -145,7 +145,7 @@ namespace DnDCombatSim_Console
 
         public void Kill(Creature target, List<Player> players, List<Monster> monsters, List<Creature> deadCreatures)
         {
-            Console.WriteLine($"{this.GetName()} {this.GetID()} killed {target.GetName()} {target.GetID()} \n");
+            Console.WriteLine($"{this.GetName()} {this.GetID()} killed {target.GetName()} {target.GetID()}");
             target._isDead = true;
 
             if (target.GetCreatureType() == 'P')
@@ -212,6 +212,12 @@ namespace DnDCombatSim_Console
             this._weapons.Add(new Weapon("Longsword", "1d10"));
         }
 
+        public void SetItems()
+        {
+            for (int i = 1; i <= 3; i++)
+                this._items.Add(new Potion("Healing Potion", i, "1d4"));
+        }
+
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
         //                                 INTERFACE METHODS
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
@@ -227,12 +233,12 @@ namespace DnDCombatSim_Console
 
             Weapon chosenWeapon = this._weapons[r.Next(0, this._weapons.Count)];
 
-            Console.WriteLine($"{this.GetName()} {this.GetID()} is attacking {target.GetName()} {target.GetID()} with a {chosenWeapon.GetName()}");
+            Console.WriteLine($"\n{this.GetName()} {this.GetID()} is attacking {target.GetName()} {target.GetID()} with a {chosenWeapon.GetName()}");
 
             if (this.RollAttack(target))
             {
                 totalDamage = target.TakeDamage(chosenWeapon);
-                Console.Write($" for {totalDamage} damage \n");
+                Console.Write($" for {totalDamage} damage");
 
                 if (target._currentHitPoints <= 0)
                     this.Kill(target, players, monsters, deadCreatures);
@@ -251,7 +257,38 @@ namespace DnDCombatSim_Console
 
         public void HealSelf()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            if (this._items.Count > 0)
+            {
+                for (int i = 0; i <= this._items.Count; i++)
+                {
+                    if (this._items[i].GetName() == "Healing Potion")
+                    {
+                        Random r = new Random();
+                        Potion p = (Potion)this._items[i];
+
+                        string damageDice = p.GetDamageDice();
+                        int indexOfD = damageDice.IndexOf('d');
+                        int numberOfDice = int.Parse(damageDice.Substring(0, indexOfD));
+                        int typeOfDice = int.Parse(damageDice.Substring(indexOfD + 1));
+                        int totalHealing = 0;
+
+                        for (int j = numberOfDice; j <= numberOfDice; j++)
+                        {
+                            totalHealing += r.Next(1, typeOfDice + 1);
+                        }
+
+                        Console.WriteLine($"\n{this.GetName()} drank a Healing Potion and received {totalHealing} hit points");
+                        this._currentHitPoints += totalHealing;
+
+                        if (this._currentHitPoints < this._maxHitPoints)
+                            this._currentHitPoints = this._maxHitPoints;
+
+                        this._items.Remove(p);
+                        break;
+                    }
+                }
+            }
         }
 
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //

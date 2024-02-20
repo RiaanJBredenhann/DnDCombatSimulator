@@ -13,19 +13,20 @@
             List<Creature> initiativeOrder = new List<Creature>();
 
             Player Bjorn = new Player("Bjorn", 2, 8, 'P', 10, 16, 12, 10, 13, 10, 14, 'M');
-            Bjorn.SetWeapons();
             players.Add(Bjorn);
-            initiativeOrder.Add(Bjorn);
 
             Player Peul = new Player("Peul", 2, 10, 'P', 16, 10, 12, 8, 10, 12, 17, 'M');
-            Peul.SetWeapons();
             players.Add(Peul);
-            initiativeOrder.Add(Peul);
 
             Player Yonaka = new Player("Yonaka", 2, 12, 'P', 17, 12, 14, 8, 10, 12, 15, 'M');
-            Yonaka.SetWeapons();
             players.Add(Yonaka);
-            initiativeOrder.Add(Yonaka);
+
+            foreach (Player p in players)
+            {
+                p.SetWeapons();
+                p.SetItems();
+                initiativeOrder.Add(p);
+            }
 
             for (int i = 1; i <= 3; i++ )
             {
@@ -69,7 +70,7 @@
             {
                 Console.WriteLine( "\n========================================");
                 Console.WriteLine($"            SIMULATION {i}");
-                Console.WriteLine( "========================================\n");
+                Console.WriteLine( "========================================");
 
                 roundCounter = 0;
                 ResetCreatures(players, monsters, deadCreatures);
@@ -81,19 +82,21 @@
                 {
                     roundCounter++;
 
-                    Console.WriteLine($"     ========== ROUND {roundCounter} ========== \n");
+                    Console.WriteLine($"\n     ========== ROUND {roundCounter} ==========");
 
                     foreach (Creature c in initiativeOrder)
                     {
                         if (!c.GetIsDead())
                         {
                             c.AttackWithWeapon(players, monsters, deadCreatures);
+                            if (c.GetCurrentHitPoints() <= c.GetMaxHitPoints())
+                                c.HealSelf();
 
                             if (players.Count == 0 || monsters.Count == 0)
                                 break;
                         }   
                         else
-                            Console.WriteLine($"{c.GetName()} is dead and can't attack \n");
+                            Console.WriteLine($"\n{c.GetName()} is dead and can't attack");
                     }
                 }
 

@@ -18,5 +18,13 @@ namespace DnDCombatSim_Console
             this._id = id;
         }
 
+        public string GetName()
+        {
+            return this._name;
+        }
+
+        
+
     }
+    
 }

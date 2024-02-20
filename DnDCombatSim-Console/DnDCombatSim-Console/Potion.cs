@@ -8,13 +8,18 @@ namespace DnDCombatSim_Console
 {
     internal class Potion : Item
     {
-        private int _healingAmount;
+        private string _damageDice;
 
         public Potion() { }
 
-        public Potion(string name, int id) : base(name, id)
+        public Potion(string name, int id, string damageDice) : base(name, id)
         {
-            
+            this._damageDice = damageDice;
+        }
+
+        public string GetDamageDice()
+        {
+            return this._damageDice;
         }
     }
 }
