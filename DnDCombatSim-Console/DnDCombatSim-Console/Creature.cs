@@ -143,9 +143,14 @@ namespace DnDCombatSim_Console
             return totalDamage;
         }
 
+        public int CalculateDamageDice()
+        {
+            return 0;
+        }
+
         public void Kill(Creature target, List<Player> players, List<Monster> monsters, List<Creature> deadCreatures)
         {
-            Console.WriteLine($"{this.GetName()} {this.GetID()} killed {target.GetName()} {target.GetID()}");
+            Console.WriteLine($"\n{this.GetName()} {this.GetID()} killed {target.GetName()} {target.GetID()}");
             target._isDead = true;
 
             if (target.GetCreatureType() == 'P')
@@ -281,7 +286,7 @@ namespace DnDCombatSim_Console
                         Console.WriteLine($"\n{this.GetName()} drank a Healing Potion and received {totalHealing} hit points");
                         this._currentHitPoints += totalHealing;
 
-                        if (this._currentHitPoints < this._maxHitPoints)
+                        if (this._currentHitPoints > this._maxHitPoints)
                             this._currentHitPoints = this._maxHitPoints;
 
                         this._items.Remove(p);
