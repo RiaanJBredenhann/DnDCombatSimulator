@@ -12,7 +12,7 @@ namespace DnDCombatSim_Console
         //                                     MEMBERS
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
 
-        private int _id;
+
 
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
         //                                   CONSTRUCTORS
@@ -20,21 +20,15 @@ namespace DnDCombatSim_Console
 
         public Monster() { }
 
-        public Monster(string name, int profMod, int maxHP, char creatureType, int str, int dex, int con, int intl, int wis, int cha, int AC, int id)
-            : base(name, profMod, maxHP,creatureType, str, dex, con, intl, wis, cha, AC)
+        public Monster(string name, int id, int profMod, int maxHP, char creatureType, int str, int dex, int con, int intl, int wis, int cha, int AC)
+            : base(name, id, profMod, maxHP,creatureType, str, dex, con, intl, wis, cha, AC)
         {
-            this._id = id;
+            
         }
 
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
         //                                  CLASS METHODS
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= //
-
-        protected override int GetID()
-        {
-            return this._id;
-            //base.GetID();
-        }
 
     }
 }

@@ -1,0 +1,181 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSim-Console\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{BB3CD071-A534-41D2-89CD-3958660EC2EF}|DnDCombatSim-Console\\DnDCombatSim-Console.csproj|c:\\users\\riaan hp\\documents\\personal\\projects\\d\u0026d combat simulator\\dndcombatsim-console\\dndcombatsim-console\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB3CD071-A534-41D2-89CD-3958660EC2EF}|DnDCombatSim-Console\\DnDCombatSim-Console.csproj|solutionrelative:dndcombatsim-console\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB3CD071-A534-41D2-89CD-3958660EC2EF}|DnDCombatSim-Console\\DnDCombatSim-Console.csproj|c:\\users\\riaan hp\\documents\\personal\\projects\\d\u0026d combat simulator\\dndcombatsim-console\\dndcombatsim-console\\monster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB3CD071-A534-41D2-89CD-3958660EC2EF}|DnDCombatSim-Console\\DnDCombatSim-Console.csproj|solutionrelative:dndcombatsim-console\\monster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB3CD071-A534-41D2-89CD-3958660EC2EF}|DnDCombatSim-Console\\DnDCombatSim-Console.csproj|c:\\users\\riaan hp\\documents\\personal\\projects\\d\u0026d combat simulator\\dndcombatsim-console\\dndcombatsim-console\\item.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB3CD071-A534-41D2-89CD-3958660EC2EF}|DnDCombatSim-Console\\DnDCombatSim-Console.csproj|solutionrelative:dndcombatsim-console\\item.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB3CD071-A534-41D2-89CD-3958660EC2EF}|DnDCombatSim-Console\\DnDCombatSim-Console.csproj|c:\\users\\riaan hp\\documents\\personal\\projects\\d\u0026d combat simulator\\dndcombatsim-console\\dndcombatsim-console\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB3CD071-A534-41D2-89CD-3958660EC2EF}|DnDCombatSim-Console\\DnDCombatSim-Console.csproj|solutionrelative:dndcombatsim-console\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB3CD071-A534-41D2-89CD-3958660EC2EF}|DnDCombatSim-Console\\DnDCombatSim-Console.csproj|c:\\users\\riaan hp\\documents\\personal\\projects\\d\u0026d combat simulator\\dndcombatsim-console\\dndcombatsim-console\\creature.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB3CD071-A534-41D2-89CD-3958660EC2EF}|DnDCombatSim-Console\\DnDCombatSim-Console.csproj|solutionrelative:dndcombatsim-console\\creature.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB3CD071-A534-41D2-89CD-3958660EC2EF}|DnDCombatSim-Console\\DnDCombatSim-Console.csproj|c:\\users\\riaan hp\\documents\\personal\\projects\\d\u0026d combat simulator\\dndcombatsim-console\\dndcombatsim-console\\potion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB3CD071-A534-41D2-89CD-3958660EC2EF}|DnDCombatSim-Console\\DnDCombatSim-Console.csproj|solutionrelative:dndcombatsim-console\\potion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB3CD071-A534-41D2-89CD-3958660EC2EF}|DnDCombatSim-Console\\DnDCombatSim-Console.csproj|c:\\users\\riaan hp\\documents\\personal\\projects\\d\u0026d combat simulator\\dndcombatsim-console\\dndcombatsim-console\\iaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB3CD071-A534-41D2-89CD-3958660EC2EF}|DnDCombatSim-Console\\DnDCombatSim-Console.csproj|solutionrelative:dndcombatsim-console\\iaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB3CD071-A534-41D2-89CD-3958660EC2EF}|DnDCombatSim-Console\\DnDCombatSim-Console.csproj|c:\\users\\riaan hp\\documents\\personal\\projects\\d\u0026d combat simulator\\dndcombatsim-console\\dndcombatsim-console\\ibonusaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB3CD071-A534-41D2-89CD-3958660EC2EF}|DnDCombatSim-Console\\DnDCombatSim-Console.csproj|solutionrelative:dndcombatsim-console\\ibonusaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB3CD071-A534-41D2-89CD-3958660EC2EF}|DnDCombatSim-Console\\DnDCombatSim-Console.csproj|c:\\users\\riaan hp\\documents\\personal\\projects\\d\u0026d combat simulator\\dndcombatsim-console\\dndcombatsim-console\\weapon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB3CD071-A534-41D2-89CD-3958660EC2EF}|DnDCombatSim-Console\\DnDCombatSim-Console.csproj|solutionrelative:dndcombatsim-console\\weapon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB3CD071-A534-41D2-89CD-3958660EC2EF}|DnDCombatSim-Console\\DnDCombatSim-Console.csproj|c:\\users\\riaan hp\\documents\\personal\\projects\\d\u0026d combat simulator\\dndcombatsim-console\\dndcombatsim-console\\spell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB3CD071-A534-41D2-89CD-3958660EC2EF}|DnDCombatSim-Console\\DnDCombatSim-Console.csproj|solutionrelative:dndcombatsim-console\\spell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSim-Console\\DnDCombatSim-Console\\Program.cs",
+              "RelativeDocumentMoniker": "DnDCombatSim-Console\\Program.cs",
+              "ToolTip": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSim-Console\\DnDCombatSim-Console\\Program.cs",
+              "RelativeToolTip": "DnDCombatSim-Console\\Program.cs",
+              "ViewState": "AQIAAIIAAAAAAAAAAAAQwCAAAAA1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-12T07:59:43.56Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Creature.cs",
+              "DocumentMoniker": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSim-Console\\DnDCombatSim-Console\\Creature.cs",
+              "RelativeDocumentMoniker": "DnDCombatSim-Console\\Creature.cs",
+              "ToolTip": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSim-Console\\DnDCombatSim-Console\\Creature.cs",
+              "RelativeToolTip": "DnDCombatSim-Console\\Creature.cs",
+              "ViewState": "AQIAAIAAAAAAAAAAAAAswLUAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-12T08:03:28.16Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Player.cs",
+              "DocumentMoniker": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSim-Console\\DnDCombatSim-Console\\Player.cs",
+              "RelativeDocumentMoniker": "DnDCombatSim-Console\\Player.cs",
+              "ToolTip": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSim-Console\\DnDCombatSim-Console\\Player.cs",
+              "RelativeToolTip": "DnDCombatSim-Console\\Player.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-12T08:03:39.135Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Monster.cs",
+              "DocumentMoniker": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSim-Console\\DnDCombatSim-Console\\Monster.cs",
+              "RelativeDocumentMoniker": "DnDCombatSim-Console\\Monster.cs",
+              "ToolTip": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSim-Console\\DnDCombatSim-Console\\Monster.cs",
+              "RelativeToolTip": "DnDCombatSim-Console\\Monster.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAB4AAABeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-12T08:03:47.042Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Item.cs",
+              "DocumentMoniker": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSim-Console\\DnDCombatSim-Console\\Item.cs",
+              "RelativeDocumentMoniker": "DnDCombatSim-Console\\Item.cs",
+              "ToolTip": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSim-Console\\DnDCombatSim-Console\\Item.cs",
+              "RelativeToolTip": "DnDCombatSim-Console\\Item.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-12T08:03:58.517Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Potion.cs",
+              "DocumentMoniker": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSim-Console\\DnDCombatSim-Console\\Potion.cs",
+              "RelativeDocumentMoniker": "DnDCombatSim-Console\\Potion.cs",
+              "ToolTip": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSim-Console\\DnDCombatSim-Console\\Potion.cs",
+              "RelativeToolTip": "DnDCombatSim-Console\\Potion.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-12T11:22:01.107Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Weapon.cs",
+              "DocumentMoniker": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSim-Console\\DnDCombatSim-Console\\Weapon.cs",
+              "RelativeDocumentMoniker": "DnDCombatSim-Console\\Weapon.cs",
+              "ToolTip": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSim-Console\\DnDCombatSim-Console\\Weapon.cs",
+              "RelativeToolTip": "DnDCombatSim-Console\\Weapon.cs",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAAwCIAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-12T08:04:10.283Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Spell.cs",
+              "DocumentMoniker": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSim-Console\\DnDCombatSim-Console\\Spell.cs",
+              "RelativeDocumentMoniker": "DnDCombatSim-Console\\Spell.cs",
+              "ToolTip": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSim-Console\\DnDCombatSim-Console\\Spell.cs",
+              "RelativeToolTip": "DnDCombatSim-Console\\Spell.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-12T08:04:16.645Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "IAction.cs",
+              "DocumentMoniker": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSim-Console\\DnDCombatSim-Console\\IAction.cs",
+              "RelativeDocumentMoniker": "DnDCombatSim-Console\\IAction.cs",
+              "ToolTip": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSim-Console\\DnDCombatSim-Console\\IAction.cs",
+              "RelativeToolTip": "DnDCombatSim-Console\\IAction.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAABoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-12T08:04:27.896Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "IBonusAction.cs",
+              "DocumentMoniker": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSim-Console\\DnDCombatSim-Console\\IBonusAction.cs",
+              "RelativeDocumentMoniker": "DnDCombatSim-Console\\IBonusAction.cs",
+              "ToolTip": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSim-Console\\DnDCombatSim-Console\\IBonusAction.cs",
+              "RelativeToolTip": "DnDCombatSim-Console\\IBonusAction.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-12T08:04:40.291Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

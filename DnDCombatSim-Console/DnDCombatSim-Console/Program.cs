@@ -12,13 +12,13 @@
             List<Creature> deadCreatures = new List<Creature>();
             List<Creature> initiativeOrder = new List<Creature>();
 
-            Player Bjorn = new Player("Bjorn", 2, 8, 'P', 10, 16, 12, 10, 13, 10, 14, 'M');
+            Player Bjorn = new Player("Bjorn", 1, 2, 8, 'P', 10, 16, 12, 10, 13, 10, 14, 'M');
             players.Add(Bjorn);
 
-            Player Peul = new Player("Peul", 2, 10, 'P', 16, 10, 12, 8, 10, 12, 17, 'M');
+            Player Peul = new Player("Paul", 2, 2, 10, 'P', 16, 10, 12, 8, 10, 12, 17, 'H');
             players.Add(Peul);
 
-            Player Yonaka = new Player("Yonaka", 2, 12, 'P', 17, 12, 14, 8, 10, 12, 15, 'M');
+            Player Yonaka = new Player("Yonaka", 3, 2, 12, 'P', 17, 12, 14, 8, 10, 12, 15, 'M');
             players.Add(Yonaka);
 
             foreach (Player p in players)
@@ -30,7 +30,7 @@
 
             for (int i = 1; i <= 3; i++ )
             {
-                Monster Monster = new Monster("Goblin", 2, 6, 'M', 12, 10, 8, 6, 7, 9, 12, i);
+                Monster Monster = new Monster("Goblin", 2, 6, 12, 'M', 10, 8, 6, 7, 9, 12, i);
                 Monster.SetWeapons();
                 monsters.Add(Monster);
                 initiativeOrder.Add(Monster);

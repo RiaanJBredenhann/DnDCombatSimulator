@@ -15,6 +15,7 @@ namespace DnDCombatSim_Console
 
         // Details
         private string _name;
+        private int _id;
         private int _proficiencyModifier;
         private int _currentHitPoints;
         private int _maxHitPoints;
@@ -55,9 +56,10 @@ namespace DnDCombatSim_Console
 
         public Creature() { }
 
-        public Creature(string name, int profMod, int maxHP, char creatureType, int str, int dex, int con, int intl, int wis, int cha, int AC)
+        public Creature(string name, int id, int profMod, int maxHP, char creatureType, int str, int dex, int con, int intl, int wis, int cha, int AC)
         {
             this._name = name;
+            this._id = id;
             this._proficiencyModifier = profMod;
             this._maxHitPoints = maxHP;
             this._currentHitPoints = maxHP;
@@ -175,9 +177,9 @@ namespace DnDCombatSim_Console
             return this._name;
         }
 
-        protected virtual int GetID()
+        public int GetID()
         {
-            return 0;
+            return this._id;
         }
 
         public int GetCurrentHitPoints()
