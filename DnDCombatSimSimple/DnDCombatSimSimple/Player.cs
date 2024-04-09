@@ -16,9 +16,9 @@ namespace DnDCombatSimSimple
         }
 
 
-        public Player(string name, int maxHP, int currentHP, int AC, int str, int dex, int con, int wis, int intl, int cha,
-                      List<Spell> spells, int[] slots, List<Weapon> weapons, List<Consumable> consumables) : 
-            base(name, maxHP, currentHP, AC, str, dex, con, wis, intl, cha, spells, slots, weapons)
+        public Player(string name, int maxHP, int AC, int str, int dex, int con, int wis, int intl, int cha,
+                      List<Spell> spells, List<Slot> slots, List<Weapon> weapons, List<Consumable> consumables) : 
+            base(name, maxHP, AC, str, dex, con, wis, intl, cha, spells, slots, weapons)
         {
             this.Consumables = consumables;
         }

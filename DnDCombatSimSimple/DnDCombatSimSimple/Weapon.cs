@@ -8,5 +8,16 @@ namespace DnDCombatSimSimple
 {
     internal class Weapon
     {
+        public string Name { get; }
+        public Dice DamageDice { get; }
+        public string Property { get; }
+
+        public Weapon(string name, Dice dice, string property)
+        {
+            this.Name = name;
+            this.DamageDice = dice;
+            this.Property = property;
+        }
+
     }
 }

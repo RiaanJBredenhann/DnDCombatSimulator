@@ -8,5 +8,14 @@ namespace DnDCombatSimSimple
 {
     internal class Spell
     {
+        public string Name { get; }
+        public Dice DamageDice { get; }
+
+
+        public Spell(string name, Dice dice)
+        {
+            this.Name = name;
+            this.DamageDice = dice;
+        }
     }
 }
