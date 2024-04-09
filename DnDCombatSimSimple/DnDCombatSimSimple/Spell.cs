@@ -10,6 +10,8 @@ namespace DnDCombatSimSimple
     {
         public string Name { get; }
         public Dice DamageDice { get; }
+        public string TargetType { get; }
+        public string Save { get; }
 
 
         public Spell(string name, Dice dice)
