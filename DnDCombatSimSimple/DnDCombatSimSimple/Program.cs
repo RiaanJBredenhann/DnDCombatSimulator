@@ -1,4 +1,6 @@
-﻿namespace DnDCombatSimSimple
+﻿using System.Runtime.CompilerServices;
+
+namespace DnDCombatSimSimple
 {
     internal class Program
     {
@@ -10,7 +12,8 @@
             Spell Fireball = new Spell("Fireball", 3, new Dice(3, 6), "Save", "Dexterity");
             Spell AcidSplash = new Spell("Acid Splash", 0, new Dice(1,6), "Save", "Dexterity");
             Spell FireBolt = new Spell("Fire Bolt", 0, new Dice(1, 6), "Armour Class", "None");
-            Consumable HealingPotion = new Consumable("Healing Potion", new Dice(1,4));
+            Consumable HealingPotion = new Consumable("Healing Potion", new Dice(1,4), 2);
+            Consumable Dynamite = new Consumable("Dynamite", new Dice(3, 6), 2);
 
             List<Weapon> weapons = new List<Weapon>();
             weapons.Add(Greataxe);
@@ -27,6 +30,7 @@
             spellSlots.Add(new Slot(4, 1));
             List<Consumable> consumables = new List<Consumable>();
             consumables.Add(HealingPotion);
+            consumables.Add(Dynamite);
 
             Player player = new Player("Bjorn", 10, 14, 2, 8, 16, 12, 14, 10, 10, spells, spellSlots, "Charisma", weapons, consumables);
             Monster monster = new Monster("Goblin", 1, 5, 14, 2, 12, 14, 10, 8, 6, 7, spells, spellSlots, "Wisdom", weapons);
@@ -81,5 +85,6 @@
 
 
         }
+
     }
 }

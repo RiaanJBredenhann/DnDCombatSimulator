@@ -100,7 +100,7 @@ namespace DnDCombatSimSimple
 
             Console.WriteLine($"{this.Name} is attacking {target.Name} with a {chosenWeapon.Name}");
 
-            int attackRoll = r.Next(1, 21) + this.ProficiencyMod + modifier;
+            int attackRoll = RollD20() + this.ProficiencyMod + modifier;
             if (attackRoll >= target.ArmourClass)
             {
                 int damageRoll = chosenWeapon.DamageDice.CalculateDice() + modifier;
@@ -177,7 +177,7 @@ namespace DnDCombatSimSimple
 
         public void SavingThrowSpell(Creature target, Spell chosenSpell, Slot chosenSlot, int attackModifier)
         {
-            Random r = new Random();
+            //Random r = new Random();
             int damageRoll;
             int saveMod;
 
@@ -208,13 +208,13 @@ namespace DnDCombatSimSimple
 
             damageRoll = chosenSpell.DamageDice.CalculateDice(chosenSpell, chosenSlot);
 
-            if (r.Next(1, 21) + saveMod < 8 + this.ProficiencyMod + attackModifier)
+            if (RollD20() + saveMod < 8 + this.ProficiencyMod + attackModifier)
             {
                 Console.WriteLine($"{target.Name} failed the save against {chosenSpell.Name} and took {damageRoll} point(s) of damage");
             }
             else
             {
-                damageRoll = damageRoll/2 + 1;
+                damageRoll = damageRoll/2;
                 Console.WriteLine($"{target.Name} failed the save against {chosenSpell.Name} and took {damageRoll} point(s) of damage");
             }
 
@@ -223,9 +223,9 @@ namespace DnDCombatSimSimple
 
         public void ArmourClassSpell(Creature target, Spell chosenSpell, Slot chosenSlot, int attackModifier)
         {
-            Random r = new Random();
+            //Random r = new Random();
 
-            int attackRoll = r.Next(1, 21) + this.ProficiencyMod + attackModifier;
+            int attackRoll = RollD20() + this.ProficiencyMod + attackModifier;
             if (attackRoll >= target.ArmourClass)
             {
                 int damageRoll = chosenSpell.DamageDice.CalculateDice(chosenSpell, chosenSlot);
@@ -243,15 +243,13 @@ namespace DnDCombatSimSimple
             {
                 Console.WriteLine($"{this.Name} rolled a {attackRoll} and missed {target.Name} dealing no damage");
             }
-        }    
-
-        public void DrinkPotion()
-        {
-
         }
-        public void ThrowGrenade()
-        {
 
+
+        public int RollD20()
+        {
+            Random r = new Random();
+            return r.Next(1, 21);
         }
 
     }

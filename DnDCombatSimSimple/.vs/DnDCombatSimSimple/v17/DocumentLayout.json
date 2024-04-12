@@ -7,8 +7,16 @@
       "RelativeMoniker": "D:0:0:{852906EE-28B0-44C1-BE3E-00FBB4117B21}|DnDCombatSimSimple\\DnDCombatSimSimple.csproj|solutionrelative:dndcombatsimsimple\\creature.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{852906EE-28B0-44C1-BE3E-00FBB4117B21}|DnDCombatSimSimple\\DnDCombatSimSimple.csproj|c:\\users\\riaan hp\\documents\\personal\\projects\\d\u0026d combat simulator\\dndcombatsimsimple\\dndcombatsimsimple\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{852906EE-28B0-44C1-BE3E-00FBB4117B21}|DnDCombatSimSimple\\DnDCombatSimSimple.csproj|solutionrelative:dndcombatsimsimple\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{852906EE-28B0-44C1-BE3E-00FBB4117B21}|DnDCombatSimSimple\\DnDCombatSimSimple.csproj|c:\\users\\riaan hp\\documents\\personal\\projects\\d\u0026d combat simulator\\dndcombatsimsimple\\dndcombatsimsimple\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{852906EE-28B0-44C1-BE3E-00FBB4117B21}|DnDCombatSimSimple\\DnDCombatSimSimple.csproj|solutionrelative:dndcombatsimsimple\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{852906EE-28B0-44C1-BE3E-00FBB4117B21}|DnDCombatSimSimple\\DnDCombatSimSimple.csproj|c:\\users\\riaan hp\\documents\\personal\\projects\\d\u0026d combat simulator\\dndcombatsimsimple\\dndcombatsimsimple\\consumable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{852906EE-28B0-44C1-BE3E-00FBB4117B21}|DnDCombatSimSimple\\DnDCombatSimSimple.csproj|solutionrelative:dndcombatsimsimple\\consumable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{852906EE-28B0-44C1-BE3E-00FBB4117B21}|DnDCombatSimSimple\\DnDCombatSimSimple.csproj|c:\\users\\riaan hp\\documents\\personal\\projects\\d\u0026d combat simulator\\dndcombatsimsimple\\dndcombatsimsimple\\dice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -23,20 +31,12 @@
       "RelativeMoniker": "D:0:0:{852906EE-28B0-44C1-BE3E-00FBB4117B21}|DnDCombatSimSimple\\DnDCombatSimSimple.csproj|solutionrelative:dndcombatsimsimple\\spell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{852906EE-28B0-44C1-BE3E-00FBB4117B21}|DnDCombatSimSimple\\DnDCombatSimSimple.csproj|c:\\users\\riaan hp\\documents\\personal\\projects\\d\u0026d combat simulator\\dndcombatsimsimple\\dndcombatsimsimple\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{852906EE-28B0-44C1-BE3E-00FBB4117B21}|DnDCombatSimSimple\\DnDCombatSimSimple.csproj|solutionrelative:dndcombatsimsimple\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{852906EE-28B0-44C1-BE3E-00FBB4117B21}|DnDCombatSimSimple\\DnDCombatSimSimple.csproj|c:\\users\\riaan hp\\documents\\personal\\projects\\d\u0026d combat simulator\\dndcombatsimsimple\\dndcombatsimsimple\\monster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{852906EE-28B0-44C1-BE3E-00FBB4117B21}|DnDCombatSimSimple\\DnDCombatSimSimple.csproj|solutionrelative:dndcombatsimsimple\\monster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{852906EE-28B0-44C1-BE3E-00FBB4117B21}|DnDCombatSimSimple\\DnDCombatSimSimple.csproj|c:\\users\\riaan hp\\documents\\personal\\projects\\d\u0026d combat simulator\\dndcombatsimsimple\\dndcombatsimsimple\\weapon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{852906EE-28B0-44C1-BE3E-00FBB4117B21}|DnDCombatSimSimple\\DnDCombatSimSimple.csproj|solutionrelative:dndcombatsimsimple\\weapon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{852906EE-28B0-44C1-BE3E-00FBB4117B21}|DnDCombatSimSimple\\DnDCombatSimSimple.csproj|c:\\users\\riaan hp\\documents\\personal\\projects\\d\u0026d combat simulator\\dndcombatsimsimple\\dndcombatsimsimple\\consumable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{852906EE-28B0-44C1-BE3E-00FBB4117B21}|DnDCombatSimSimple\\DnDCombatSimSimple.csproj|solutionrelative:dndcombatsimsimple\\consumable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,13 +50,13 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSimSimple\\DnDCombatSimSimple\\Program.cs",
               "RelativeDocumentMoniker": "DnDCombatSimSimple\\Program.cs",
               "ToolTip": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSimSimple\\DnDCombatSimSimple\\Program.cs",
               "RelativeToolTip": "DnDCombatSimSimple\\Program.cs",
-              "ViewState": "AQIAACEAAAAAAAAAAAAmwD4AAAAMAAAA",
+              "ViewState": "AQIAAEMAAAAAAAAAAAAQwFcAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-04T07:13:44.633Z",
               "EditorCaption": ""
@@ -69,26 +69,27 @@
               "RelativeDocumentMoniker": "DnDCombatSimSimple\\Creature.cs",
               "ToolTip": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSimSimple\\DnDCombatSimSimple\\Creature.cs",
               "RelativeToolTip": "DnDCombatSimSimple\\Creature.cs",
-              "ViewState": "AQIAAM4AAAAAAAAAAAAiwI8AAAA6AAAA",
+              "ViewState": "AQIAADkAAAAAAAAAAAAIwOMAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-04T07:15:02.734Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "Player.cs",
               "DocumentMoniker": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSimSimple\\DnDCombatSimSimple\\Player.cs",
               "RelativeDocumentMoniker": "DnDCombatSimSimple\\Player.cs",
               "ToolTip": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSimSimple\\DnDCombatSimSimple\\Player.cs",
               "RelativeToolTip": "DnDCombatSimSimple\\Player.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAABXAAAA",
+              "ViewState": "AQIAACQAAAAAAAAAAAAUwCAAAAAOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-04T07:40:39.422Z"
+              "WhenOpened": "2024-04-04T07:40:39.422Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Monster.cs",
               "DocumentMoniker": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSimSimple\\DnDCombatSimSimple\\Monster.cs",
               "RelativeDocumentMoniker": "DnDCombatSimSimple\\Monster.cs",
@@ -100,7 +101,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Dice.cs",
               "DocumentMoniker": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSimSimple\\DnDCombatSimSimple\\Dice.cs",
               "RelativeDocumentMoniker": "DnDCombatSimSimple\\Dice.cs",
@@ -108,12 +109,11 @@
               "RelativeToolTip": "DnDCombatSimSimple\\Dice.cs",
               "ViewState": "AQIAAA4AAAAAAAAAAAA6wC0AAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-08T07:46:27.066Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-08T07:46:27.066Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "Spell.cs",
               "DocumentMoniker": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSimSimple\\DnDCombatSimSimple\\Spell.cs",
               "RelativeDocumentMoniker": "DnDCombatSimSimple\\Spell.cs",
@@ -125,7 +125,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "Slot.cs",
               "DocumentMoniker": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSimSimple\\DnDCombatSimSimple\\Slot.cs",
               "RelativeDocumentMoniker": "DnDCombatSimSimple\\Slot.cs",
@@ -137,7 +137,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "Weapon.cs",
               "DocumentMoniker": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSimSimple\\DnDCombatSimSimple\\Weapon.cs",
               "RelativeDocumentMoniker": "DnDCombatSimSimple\\Weapon.cs",
@@ -149,15 +149,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 3,
               "Title": "Consumable.cs",
               "DocumentMoniker": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSimSimple\\DnDCombatSimSimple\\Consumable.cs",
               "RelativeDocumentMoniker": "DnDCombatSimSimple\\Consumable.cs",
               "ToolTip": "C:\\Users\\Riaan HP\\Documents\\Personal\\Projects\\D\u0026D Combat Simulator\\DnDCombatSimSimple\\DnDCombatSimSimple\\Consumable.cs",
               "RelativeToolTip": "DnDCombatSimSimple\\Consumable.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAjAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAlAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-04T07:50:16.37Z"
+              "WhenOpened": "2024-04-04T07:50:16.37Z",
+              "EditorCaption": ""
             }
           ]
         }

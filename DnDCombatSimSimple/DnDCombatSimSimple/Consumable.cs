@@ -10,12 +10,14 @@ namespace DnDCombatSimSimple
     {
         public string Name { get; }
         public Dice DamageDice { get; }
+        public int Amount { get; set; }
 
 
-        public Consumable(string name, Dice dice)
+        public Consumable(string name, Dice dice, int amount)
         {
             this.Name = name;
             this.DamageDice = dice;
+            this.Amount = amount;
         }
 
     }
