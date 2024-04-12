@@ -9,7 +9,7 @@ namespace DnDCombatSimSimple
     internal class Slot
     {
         public int Level { get; }
-        public int Amount { get; }
+        public int Amount { get; set; }
 
         public Slot(int level, int amount)
         {

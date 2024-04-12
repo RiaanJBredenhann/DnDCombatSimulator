@@ -92,8 +92,6 @@ namespace DnDCombatSimSimple
             Random r = new Random();
             Weapon chosenWeapon = this.Weapons[r.Next(0, this.Weapons.Count)];
             int modifier;
-            int attackRoll;
-            int damageRoll;
 
             if (chosenWeapon.Property == "Light")
                 modifier = this.DexterityMod;
@@ -102,13 +100,13 @@ namespace DnDCombatSimSimple
 
             Console.WriteLine($"{this.Name} is attacking {target.Name} with a {chosenWeapon.Name}");
 
-            attackRoll = r.Next(1, 21) + this.ProficiencyMod + modifier;
+            int attackRoll = r.Next(1, 21) + this.ProficiencyMod + modifier;
             if (attackRoll >= target.ArmourClass)
             {
-                damageRoll = chosenWeapon.DamageDice.CalculateDice() + modifier;
+                int damageRoll = chosenWeapon.DamageDice.CalculateDice() + modifier;
                 target.CurrentHP -= damageRoll;
 
-                Console.Write($"{this.Name} rolled a {attackRoll} and hit {target.Name} dealing {damageRoll} damage");
+                Console.Write($"{this.Name} rolled a {attackRoll} and hit {target.Name} dealing {damageRoll} point(s) of damage");
 
                 if (target.CurrentHP <= 0)
                 {
@@ -126,33 +124,114 @@ namespace DnDCombatSimSimple
         public void CastASpell(Creature target)
         {
             Random r = new Random();
-            Spell chosenSpell = this.Spells[r.Next(0, this.Spells.Count)];
-            int modifier = 0;
-            int attackRoll;
-            int damageRoll;
 
-            switch (this.SpellcastingAbility)
+            Spell chosenSpell = this.Spells[r.Next(0, this.Spells.Count)];
+            Slot chosenSlot = ChooseSpellSlot(chosenSpell);
+
+            if (chosenSlot != null)
             {
-                case "Wisdom": 
-                    modifier = this.WisdomMod;
+                chosenSlot.Amount -= 1;
+                int attackModifier;
+                switch (this.SpellcastingAbility)
+                {
+                    case "Wisdom":
+                        attackModifier = this.WisdomMod;
+                        break;
+                    case "Intelligence":
+                        attackModifier = this.IntelligenceMod;
+                        break;
+                    case "Charisma":
+                        attackModifier = this.CharismaMod;
+                        break;
+                    default:
+                        attackModifier = 0;
+                        break;
+                }
+
+                Console.WriteLine($"{this.Name} is casting {chosenSpell.Name} at level {chosenSlot.Level} on {target.Name}");
+
+                if (chosenSpell.TargetType == "Save")
+                    SavingThrowSpell(target, chosenSpell, chosenSlot, attackModifier);
+                else
+                    ArmourClassSpell(target, chosenSpell, chosenSlot, attackModifier);
+            }
+            else
+            {
+                Console.WriteLine($"{this.Name} does not have any spell slots left to cast {chosenSpell.Name} and will attack with their weapon");
+                this.AttackWithWeapon(target);
+            }
+
+        }
+
+        public Slot ChooseSpellSlot(Spell chosenSpell)
+        {
+            for (int i = 0; i < this.SpellSlots.Count; i++)
+            {
+                if (this.SpellSlots[i].Level >= chosenSpell.Level && this.SpellSlots[i].Amount > 0)
+                {
+                    return this.SpellSlots[i];
+                }
+            }
+            return null;
+        }
+
+        public void SavingThrowSpell(Creature target, Spell chosenSpell, Slot chosenSlot, int attackModifier)
+        {
+            Random r = new Random();
+            int damageRoll;
+            int saveMod;
+
+            switch (chosenSpell.Save)
+            {
+                case "Strength":
+                    saveMod = target.StrengthMod;
                     break;
-                case "Intelligence": 
-                    modifier = this.IntelligenceMod;
+                case "Dexterity":
+                    saveMod = target.DexterityMod;
                     break;
-                case "Charisma": 
-                    modifier = this.CharismaMod;
+                case "Constitution":
+                    saveMod = target.ConstitutionMod;
+                    break;
+                case "Intelligence":
+                    saveMod = target.IntelligenceMod;
+                    break;
+                case "Wisdom":
+                    saveMod = target.WisdomMod;
+                    break;
+                case "Charisma":
+                    saveMod = target.CharismaMod;
+                    break;
+                default:
+                    saveMod = 0;
                     break;
             }
 
-            Console.WriteLine($"{this.Name} is casting {chosenSpell.Name} on {target.Name}");
+            damageRoll = chosenSpell.DamageDice.CalculateDice(chosenSpell, chosenSlot);
 
-            attackRoll = r.Next(1, 21) + this.ProficiencyMod + modifier;
+            if (r.Next(1, 21) + saveMod < 8 + this.ProficiencyMod + attackModifier)
+            {
+                Console.WriteLine($"{target.Name} failed the save against {chosenSpell.Name} and took {damageRoll} point(s) of damage");
+            }
+            else
+            {
+                damageRoll = damageRoll/2 + 1;
+                Console.WriteLine($"{target.Name} failed the save against {chosenSpell.Name} and took {damageRoll} point(s) of damage");
+            }
+
+            target.CurrentHP -= damageRoll;
+        }
+
+        public void ArmourClassSpell(Creature target, Spell chosenSpell, Slot chosenSlot, int attackModifier)
+        {
+            Random r = new Random();
+
+            int attackRoll = r.Next(1, 21) + this.ProficiencyMod + attackModifier;
             if (attackRoll >= target.ArmourClass)
             {
-                damageRoll = chosenSpell.DamageDice.CalculateDice() + modifier;
+                int damageRoll = chosenSpell.DamageDice.CalculateDice(chosenSpell, chosenSlot);
                 target.CurrentHP -= damageRoll;
 
-                Console.Write($"{this.Name} rolled a {attackRoll} and hit {target.Name} dealing {damageRoll} damage");
+                Console.Write($"{this.Name} rolled a {attackRoll} and hit {target.Name} dealing {damageRoll} point(s) of damage");
 
                 if (target.CurrentHP <= 0)
                 {
@@ -164,8 +243,7 @@ namespace DnDCombatSimSimple
             {
                 Console.WriteLine($"{this.Name} rolled a {attackRoll} and missed {target.Name} dealing no damage");
             }
-
-        }
+        }    
 
         public void DrinkPotion()
         {

@@ -7,7 +7,9 @@
             Weapon Greataxe = new Weapon("Greataxe", new Dice(2,6), "Heavy");
             Weapon Dagger = new Weapon("Dagger", new Dice(1, 4), "Light");
             Weapon HandCrossbow = new  Weapon("Hand Crossbow", new Dice(1, 6), "Light");
-            Spell Fireball = new Spell("Fireball", new Dice(3, 6));
+            Spell Fireball = new Spell("Fireball", 3, new Dice(3, 6), "Save", "Dexterity");
+            Spell AcidSplash = new Spell("Acid Splash", 0, new Dice(1,6), "Save", "Dexterity");
+            Spell FireBolt = new Spell("Fire Bolt", 0, new Dice(1, 6), "Armour Class", "None");
             Consumable HealingPotion = new Consumable("Healing Potion", new Dice(1,4));
 
             List<Weapon> weapons = new List<Weapon>();
@@ -16,10 +18,12 @@
             weapons.Add(HandCrossbow);
             List<Spell> spells = new List<Spell>();
             spells.Add(Fireball);
+            spells.Add(AcidSplash);
+            spells.Add(FireBolt);
             List<Slot> spellSlots = new List<Slot>();
-            spellSlots.Add(new Slot(1, 4));
-            spellSlots.Add(new Slot(2, 3));
-            spellSlots.Add(new Slot(3, 2));
+            spellSlots.Add(new Slot(1, 1));
+            spellSlots.Add(new Slot(2, 1));
+            spellSlots.Add(new Slot(3, 1));
             spellSlots.Add(new Slot(4, 1));
             List<Consumable> consumables = new List<Consumable>();
             consumables.Add(HealingPotion);
@@ -47,13 +51,18 @@
 
             /*Console.WriteLine(player.Weapons.Count);*/
 
-            for (int i = 0; i < 5; i++)
+            /*for (int i = 0; i < 5; i++)
             player.AttackWithWeapon(monster);
 
             Console.WriteLine();
 
             for (int i = 0; i < 5; i++)
-            player.CastASpell(monster);
+            player.CastASpell(monster);*/
+
+            for (int i = 0; i <= 10; i++ )
+            {
+                player.CastASpell(monster);
+            }
 
 
 

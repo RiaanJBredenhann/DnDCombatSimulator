@@ -19,12 +19,25 @@ namespace DnDCombatSimSimple
         }
 
         // returns the raw value of a specified dice roll
-        public int CalculateDice() // checked
+        public int CalculateDice()
         {
             Random r = new Random();
             int result = 0;
 
             for (int i = 1; i <= this.Amount; i++)
+            {
+                result += r.Next(1, this.Type + 1);
+            }
+
+            return result;
+        }
+
+        public int CalculateDice(Spell spell, Slot slot)
+        {
+            Random r = new Random();
+            int result = 0;
+
+            for (int i = 1; i <= this.Amount + (slot.Level - spell.Level); i++)
             {
                 result += r.Next(1, this.Type + 1);
             }
