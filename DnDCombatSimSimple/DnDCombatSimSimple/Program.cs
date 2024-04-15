@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using System.Linq;
 
 namespace DnDCombatSimSimple
 {
@@ -12,7 +13,7 @@ namespace DnDCombatSimSimple
             Spell Fireball = new Spell("Fireball", 3, new Dice(3, 6), "Save", "Dexterity");
             Spell AcidSplash = new Spell("Acid Splash", 0, new Dice(1,6), "Save", "Dexterity");
             Spell FireBolt = new Spell("Fire Bolt", 0, new Dice(1, 6), "Armour Class", "None");
-            Consumable HealingPotion = new Consumable("Healing Potion", new Dice(1,4), 2);
+            Consumable HealingPotion = new Consumable("Potion of Healing", new Dice(1,4), 2);
             Consumable Dynamite = new Consumable("Dynamite", new Dice(3, 6), 2);
 
             List<Weapon> weapons = new List<Weapon>();
@@ -33,64 +34,63 @@ namespace DnDCombatSimSimple
             consumables.Add(HealingPotion);
             consumables.Add(Dynamite);
 
-            Player player = new Player("Bjorn", 10, 14, 2, 8, 16, 12, 14, 10, 10, spells, spellSlots, "Charisma", weapons, consumables);
-            Monster monster = new Monster("Goblin", 1, 5, 14, 2, 12, 14, 10, 8, 6, 7, spells, spellSlots, "Wisdom", weapons);
-
-            /*Console.WriteLine("Name: " + player.Name);
-            Console.WriteLine("Max HP: " + player.MaxHP);
-            Console.WriteLine("Current HP: " + player.CurrentHP);
-            Console.WriteLine("Armour CLass: " + player.ArmourClass);
-            Console.WriteLine("Strength Mod: " + player.StrengthMod);
-            Console.WriteLine("Dexterity Mod: " + player.DexterityMod);
-            Console.WriteLine("Constitution Mod: " + player.ConstitutionMod);
-            Console.WriteLine("Wisdom Mod: " + player.WisdomMod);
-            Console.WriteLine("Intelligence Mod: " + player.IntelligenceMod);
-            Console.WriteLine("Charisma Mod: " + player.CharismaMod);
-            Console.WriteLine("Spells: " + player.Spells[0].Name);
-            Console.WriteLine("Spell Slots: " + player.SpellSlots[0].Level);
-            Console.WriteLine("Weapons: " + player.Weapons[0].Name);
-            Console.WriteLine("Consumables: " + player.Consumables[0].Name);*/
-
-            /*Console.WriteLine(player.Weapons[0].DamageDice.CalculateDice());
-            Console.WriteLine(player.Weapons[0].DamageDice.CalculateDice());*/
-
-            /*Console.WriteLine(player.Weapons.Count);*/
-
-            /*for (int i = 0; i < 5; i++)
-            player.AttackWithWeapon(monster);
-
-            Console.WriteLine();
-
-            for (int i = 0; i < 5; i++)
-            player.CastASpell(monster);*/
-
-            for (int i = 0; i <= 20; i++)
-            {
-                player.AttackWithWeapon(monster);
-                Console.WriteLine();
-            }
-
-            for (int i = 0; i <= 20; i++ )
-            {
-                player.CastASpell(monster);
-                Console.WriteLine();
-            }
 
 
+            Player player1 = new Player("Bjorn", 10, 14, 2, 8, 16, 12, 14, 10, 10, spells, spellSlots, "Charisma", weapons, consumables);
+            Player player2 = new Player("Yonaka", 10, 14, 2, 8, 16, 12, 14, 10, 10, spells, spellSlots, "Charisma", weapons, consumables);
+            Player player3 = new Player("Paul", 10, 14, 2, 8, 16, 12, 14, 10, 10, spells, spellSlots, "Charisma", weapons, consumables);
+            Monster monster1 = new Monster("Goblin 1", 1, 5, 14, 2, 12, 14, 10, 8, 6, 7, spells, spellSlots, "Wisdom", weapons);
+            Monster monster2 = new Monster("Goblin 2", 1, 5, 14, 2, 12, 14, 10, 8, 6, 7, spells, spellSlots, "Wisdom", weapons);
+            Monster monster3 = new Monster("Goblin 3", 1, 5, 14, 2, 12, 14, 10, 8, 6, 7, spells, spellSlots, "Wisdom", weapons);
 
-
-
-
-
-
-
-            List<Player> players = new List<Player>();
+          /*  List<Player> players = new List<Player>();
             List<Monster> monsters = new List<Monster>();
             List<Creature> initiativeOrder = new List<Creature>();
 
+            players.Add(player1);
+            players.Add(player2);
+            players.Add(player3);
+
+            initiativeOrder.Add(player1);
+            initiativeOrder.Add(player2);
+            initiativeOrder.Add(player3);
+
+            monsters.Add(monster1);
+            monsters.Add(monster2);
+            monsters.Add(monster3);
+
+            initiativeOrder.Add(monster1);
+            initiativeOrder.Add(monster2);
+            initiativeOrder.Add(monster3);
+
+            initiativeOrder = RollInitiative(initiativeOrder);*/
 
 
 
+            for (int i = 0; i < 10; i++)
+            {
+                player1.UseConsumable();
+                Console.WriteLine();
+            }
+
+
+            for (int i = 0; i < 10; i++)
+            {
+                player1.UseConsumable(monster1);
+                Console.WriteLine();
+            }
+
+
+
+
+        }
+
+        public static List<Creature> RollInitiative(List<Creature> creatures)
+        {
+            foreach (Creature c in creatures)
+                c.Initiative = Creature.RollD20() + c.DexterityMod;
+
+            return creatures.OrderByDescending(c => c.Initiative).ToList();
 
         }
 

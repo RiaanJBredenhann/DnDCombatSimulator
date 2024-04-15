@@ -13,6 +13,7 @@ namespace DnDCombatSimSimple
         public int MaxHP { get; }
         public double CurrentHP { get; set; }
         public int ArmourClass { get; }
+        public int Initiative { get; set; }
 
         public int ProficiencyMod { get; }
         public int Strength { get; }
@@ -236,7 +237,7 @@ namespace DnDCombatSimSimple
             else
             {
                 damageRoll = Math.Ceiling(damageRoll/2);
-                Console.WriteLine($"{target.Name} failed the save against {chosenSpell.Name} and took {damageRoll} point(s) of damage");
+                Console.WriteLine($"{target.Name} succedded on the save against {chosenSpell.Name} and took {damageRoll} point(s) of damage");
             }
 
             target.CurrentHP -= damageRoll;
@@ -272,11 +273,13 @@ namespace DnDCombatSimSimple
         }
 
 
-        public int RollD20()
+        public static int RollD20()
         {
             Random r = new Random();
             return r.Next(1, 21);
         }
+
+        
 
     }
 }

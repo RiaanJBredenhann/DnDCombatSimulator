@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,19 +31,28 @@ namespace DnDCombatSimSimple
 
         public void UseConsumable(Creature target)
         {
-            //Random r = new Random();
-
             for (int i = 0; i < this.Consumables.Count; i++)
             {
                 if (this.Consumables[i].Name == "Dynamite")
                 {
-                    this.Consumables[i].Amount -= 1;
+                    if (this.Consumables[i].Amount > 0)
+                    {
+                        Console.WriteLine($"{this.Name} is throwing a stick of dynamite at {target.Name}");
+                        this.Consumables[i].Amount -= 1;
 
-                    if (RollD20() + target.DexterityMod >= 12)
-                        target.CurrentHP -= this.Consumables[i].DamageDice.CalculateDice() / 2;
-                    else
-                        target.CurrentHP -= this.Consumables[i].DamageDice.CalculateDice();
-                    break;
+                        int d20Roll = RollD20();
+                        double damageRoll = this.Consumables[i].DamageDice.CalculateDice();
+
+                        if (d20Roll + target.DexterityMod >= 12)
+                        {
+                            damageRoll = Math.Ceiling(damageRoll / 2);
+                            Console.WriteLine($"{target.Name} succeeded on the save against the dynamite and took {damageRoll} point(s) of damage");
+                        }
+                        else Console.WriteLine($"{target.Name} failed the save against the dynamite and took {damageRoll} point(s) of damage");
+
+                        target.CurrentHP -= damageRoll;
+                        break;
+                    } else Console.WriteLine($"{this.Name} has no more sticks of dynamite.");
                 }
             }
         }
@@ -51,14 +61,22 @@ namespace DnDCombatSimSimple
         {
             for (int i = 0; i < this.Consumables.Count; i++)
             {
-                if (this.Consumables[i].Name == "Healing Potion")
+                if (this.Consumables[i].Name == "Potion of Healing")
                 {
-                    this.Consumables[i].Amount -= 1;
-                    this.CurrentHP += this.Consumables[i].DamageDice.CalculateDice();
-                    break;
-                }
-            }
+                    if (this.Consumables[i].Amount > 0)
+                    {
+                        this.Consumables[i].Amount -= 1;
+                        double healingAmount = this.Consumables[i].DamageDice.CalculateDice();
 
+                        Console.WriteLine($"{this.Name} is drinking a {this.Consumables[i].Name} and healed for {healingAmount} hit point(s)");
+                        this.CurrentHP += healingAmount;
+
+                        if (this.CurrentHP > this.MaxHP) this.CurrentHP = this.MaxHP;
+
+                        break;
+                    } else Console.WriteLine($"{this.Name} has no more healing potions.");
+                } 
+            }
         }
 
     }
