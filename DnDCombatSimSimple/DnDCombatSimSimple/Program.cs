@@ -24,6 +24,7 @@ namespace DnDCombatSimSimple
             spells.Add(AcidSplash);
             spells.Add(FireBolt);
             List<Slot> spellSlots = new List<Slot>();
+            spellSlots.Add(new Slot(0, 0));
             spellSlots.Add(new Slot(1, 1));
             spellSlots.Add(new Slot(2, 1));
             spellSlots.Add(new Slot(3, 1));
@@ -63,9 +64,16 @@ namespace DnDCombatSimSimple
             for (int i = 0; i < 5; i++)
             player.CastASpell(monster);*/
 
-            for (int i = 0; i <= 10; i++ )
+            for (int i = 0; i <= 20; i++)
+            {
+                player.AttackWithWeapon(monster);
+                Console.WriteLine();
+            }
+
+            for (int i = 0; i <= 20; i++ )
             {
                 player.CastASpell(monster);
+                Console.WriteLine();
             }
 
 

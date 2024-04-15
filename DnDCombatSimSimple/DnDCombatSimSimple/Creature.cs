@@ -11,7 +11,7 @@ namespace DnDCombatSimSimple
         public string Name { get; }
 
         public int MaxHP { get; }
-        public int CurrentHP { get; set; }
+        public double CurrentHP { get; set; }
         public int ArmourClass { get; }
 
         public int ProficiencyMod { get; }
@@ -100,10 +100,17 @@ namespace DnDCombatSimSimple
 
             Console.WriteLine($"{this.Name} is attacking {target.Name} with a {chosenWeapon.Name}");
 
-            int attackRoll = RollD20() + this.ProficiencyMod + modifier;
+            int d20Roll = RollD20();
+            int attackRoll = d20Roll + this.ProficiencyMod + modifier;
+
             if (attackRoll >= target.ArmourClass)
             {
-                int damageRoll = chosenWeapon.DamageDice.CalculateDice() + modifier;
+                double damageRoll = chosenWeapon.DamageDice.CalculateDice() + modifier;
+                if (d20Roll == 20)
+                {
+                    damageRoll *= 2;
+                    Console.WriteLine($"{this.Name} landed a critical hit dealing double damage!");
+                }
                 target.CurrentHP -= damageRoll;
 
                 Console.Write($"{this.Name} rolled a {attackRoll} and hit {target.Name} dealing {damageRoll} point(s) of damage");
@@ -130,7 +137,6 @@ namespace DnDCombatSimSimple
 
             if (chosenSlot != null)
             {
-                chosenSlot.Amount -= 1;
                 int attackModifier;
                 switch (this.SpellcastingAbility)
                 {
@@ -165,20 +171,29 @@ namespace DnDCombatSimSimple
 
         public Slot ChooseSpellSlot(Spell chosenSpell)
         {
-            for (int i = 0; i < this.SpellSlots.Count; i++)
+            if (chosenSpell.Level == 0)
             {
-                if (this.SpellSlots[i].Level >= chosenSpell.Level && this.SpellSlots[i].Amount > 0)
-                {
-                    return this.SpellSlots[i];
-                }
+                return this.SpellSlots[0];
             }
-            return null;
+            else
+            {
+                for (int i = 1; i < this.SpellSlots.Count; i++)
+                {
+                    if (this.SpellSlots[i].Level >= chosenSpell.Level && this.SpellSlots[i].Amount > 0)
+                    {
+                        this.SpellSlots[i].Amount -= 1;
+                        return this.SpellSlots[i];
+                    }
+                }
+                return null;
+            }
+            
         }
 
         public void SavingThrowSpell(Creature target, Spell chosenSpell, Slot chosenSlot, int attackModifier)
         {
             //Random r = new Random();
-            int damageRoll;
+            double damageRoll;
             int saveMod;
 
             switch (chosenSpell.Save)
@@ -206,15 +221,21 @@ namespace DnDCombatSimSimple
                     break;
             }
 
+            int d20Roll = RollD20();
             damageRoll = chosenSpell.DamageDice.CalculateDice(chosenSpell, chosenSlot);
-
-            if (RollD20() + saveMod < 8 + this.ProficiencyMod + attackModifier)
+            if (d20Roll == 20)
+            {
+                damageRoll *= 2;
+                Console.WriteLine($"{this.Name} landed a critical hit dealing double damage!");
+            }
+                
+            if (d20Roll + saveMod < 8 + this.ProficiencyMod + attackModifier)
             {
                 Console.WriteLine($"{target.Name} failed the save against {chosenSpell.Name} and took {damageRoll} point(s) of damage");
             }
             else
             {
-                damageRoll = damageRoll/2;
+                damageRoll = Math.Ceiling(damageRoll/2);
                 Console.WriteLine($"{target.Name} failed the save against {chosenSpell.Name} and took {damageRoll} point(s) of damage");
             }
 
@@ -224,11 +245,16 @@ namespace DnDCombatSimSimple
         public void ArmourClassSpell(Creature target, Spell chosenSpell, Slot chosenSlot, int attackModifier)
         {
             //Random r = new Random();
-
-            int attackRoll = RollD20() + this.ProficiencyMod + attackModifier;
+            int d20Roll = RollD20();
+            int attackRoll = d20Roll + this.ProficiencyMod + attackModifier;
             if (attackRoll >= target.ArmourClass)
             {
-                int damageRoll = chosenSpell.DamageDice.CalculateDice(chosenSpell, chosenSlot);
+                double damageRoll = chosenSpell.DamageDice.CalculateDice(chosenSpell, chosenSlot);
+                if (d20Roll == 20)
+                {
+                    damageRoll *= 2;
+                    Console.WriteLine($"{this.Name} landed a critical hit dealing double damage!");
+                }
                 target.CurrentHP -= damageRoll;
 
                 Console.Write($"{this.Name} rolled a {attackRoll} and hit {target.Name} dealing {damageRoll} point(s) of damage");
