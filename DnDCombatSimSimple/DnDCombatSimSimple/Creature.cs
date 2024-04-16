@@ -8,6 +8,7 @@ namespace DnDCombatSimSimple
 {
     internal class Creature
     {
+        public char CreatureType { get; }
         public string Name { get; }
 
         public int MaxHP { get; }
@@ -58,9 +59,10 @@ namespace DnDCombatSimSimple
         public bool IsDead { get; set; }
 
 
-        public Creature(string name, int maxHP, int AC, int profMod, int str, int dex, int con, int wis, int intl, int cha, 
+        public Creature(char creatureType, string name, int maxHP, int AC, int profMod, int str, int dex, int con, int wis, int intl, int cha, 
                         List<Spell> spells, List<Slot> slots, string spellcastingAbility, List<Weapon> weapons) 
         { 
+            this.CreatureType = creatureType;
             this.Name = name;
             this.MaxHP = maxHP;
             this.CurrentHP = maxHP;
@@ -79,6 +81,8 @@ namespace DnDCombatSimSimple
             this.IsDead = false;
         }
 
+        public Creature() { }
+
         // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
         //                                             METHODS
         // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
@@ -86,6 +90,12 @@ namespace DnDCombatSimSimple
         static int CalculateModifier(int abilityScore)
         {
             return (abilityScore - 10) / 2;
+        }
+
+        public Creature ChooseTarget(List<Creature> creatures)
+        {
+            Random r = new Random();
+            return creatures[r.Next(0, creatures.Count)];
         }
 
         public void AttackWithWeapon(Creature target)
@@ -248,6 +258,7 @@ namespace DnDCombatSimSimple
             //Random r = new Random();
             int d20Roll = RollD20();
             int attackRoll = d20Roll + this.ProficiencyMod + attackModifier;
+
             if (attackRoll >= target.ArmourClass)
             {
                 double damageRoll = chosenSpell.DamageDice.CalculateDice(chosenSpell, chosenSlot);
@@ -260,11 +271,7 @@ namespace DnDCombatSimSimple
 
                 Console.Write($"{this.Name} rolled a {attackRoll} and hit {target.Name} dealing {damageRoll} point(s) of damage");
 
-                if (target.CurrentHP <= 0)
-                {
-                    target.IsDead = true;
-                    Console.WriteLine($" killing {target.Name}");
-                }
+                if (target.CurrentHP <= 0) Console.WriteLine($" killing {target.Name}");
             }
             else
             {

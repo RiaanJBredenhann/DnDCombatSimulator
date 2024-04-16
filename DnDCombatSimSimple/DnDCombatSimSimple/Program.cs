@@ -36,14 +36,14 @@ namespace DnDCombatSimSimple
 
 
 
-            Player player1 = new Player("Bjorn", 10, 14, 2, 8, 16, 12, 14, 10, 10, spells, spellSlots, "Charisma", weapons, consumables);
-            Player player2 = new Player("Yonaka", 10, 14, 2, 8, 16, 12, 14, 10, 10, spells, spellSlots, "Charisma", weapons, consumables);
-            Player player3 = new Player("Paul", 10, 14, 2, 8, 16, 12, 14, 10, 10, spells, spellSlots, "Charisma", weapons, consumables);
-            Monster monster1 = new Monster("Goblin 1", 1, 5, 14, 2, 12, 14, 10, 8, 6, 7, spells, spellSlots, "Wisdom", weapons);
-            Monster monster2 = new Monster("Goblin 2", 1, 5, 14, 2, 12, 14, 10, 8, 6, 7, spells, spellSlots, "Wisdom", weapons);
-            Monster monster3 = new Monster("Goblin 3", 1, 5, 14, 2, 12, 14, 10, 8, 6, 7, spells, spellSlots, "Wisdom", weapons);
+            Player player1 = new Player('P', "Bjorn", 10, 14, 2, 8, 16, 12, 14, 10, 10, spells, spellSlots, "Charisma", weapons, consumables);
+            Player player2 = new Player('P', "Yonaka", 10, 14, 2, 8, 16, 12, 14, 10, 10, spells, spellSlots, "Charisma", weapons, consumables);
+            Player player3 = new Player('P', "Paul", 10, 14, 2, 8, 16, 12, 14, 10, 10, spells, spellSlots, "Charisma", weapons, consumables);
+            Monster monster1 = new Monster('M', "Goblin 1", 1, 5, 14, 2, 12, 14, 10, 8, 6, 7, spells, spellSlots, "Wisdom", weapons);
+            Monster monster2 = new Monster('M', "Goblin 2", 1, 5, 14, 2, 12, 14, 10, 8, 6, 7, spells, spellSlots, "Wisdom", weapons);
+            Monster monster3 = new Monster('M', "Goblin 3", 1, 5, 14, 2, 12, 14, 10, 8, 6, 7, spells, spellSlots, "Wisdom", weapons);
 
-          /*  List<Player> players = new List<Player>();
+            List<Player> players = new List<Player>();
             List<Monster> monsters = new List<Monster>();
             List<Creature> initiativeOrder = new List<Creature>();
 
@@ -63,24 +63,28 @@ namespace DnDCombatSimSimple
             initiativeOrder.Add(monster2);
             initiativeOrder.Add(monster3);
 
-            initiativeOrder = RollInitiative(initiativeOrder);*/
+            initiativeOrder = RollInitiative(initiativeOrder);
 
+            Random r = new Random();
 
-
-            for (int i = 0; i < 10; i++)
+            foreach (Creature c in initiativeOrder)
             {
-                player1.UseConsumable();
-                Console.WriteLine();
+                if (c.CreatureType == 'P')
+                {
+                    c.AttackWithWeapon(monsters[r.Next(0, monsters.Count)]);
+                    Console.WriteLine();
+                    c.CastASpell(monsters[r.Next(0, monsters.Count)]);
+                    Console.WriteLine();
+                }
+                else
+                {
+                    c.AttackWithWeapon(players[r.Next(0, players.Count)]);
+                    Console.WriteLine();
+                    c.CastASpell(players[r.Next(0, players.Count)]);
+                    Console.WriteLine();
+                }
+                
             }
-
-
-            for (int i = 0; i < 10; i++)
-            {
-                player1.UseConsumable(monster1);
-                Console.WriteLine();
-            }
-
-
 
 
         }
@@ -90,7 +94,8 @@ namespace DnDCombatSimSimple
             foreach (Creature c in creatures)
                 c.Initiative = Creature.RollD20() + c.DexterityMod;
 
-            return creatures.OrderByDescending(c => c.Initiative).ToList();
+            creatures.Sort((c1, c2) => c2.Initiative.CompareTo(c1.Initiative));
+            return creatures;
 
         }
 
