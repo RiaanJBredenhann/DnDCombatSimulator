@@ -24,10 +24,8 @@ namespace DnDCombatSimSimple
             Random r = new Random();
             double result = 0;
 
-            for (int i = 1; i <= this.Amount; i++)
-            {
+            for (int i = 1; i <= this.Amount; i++) 
                 result += r.Next(1, this.Type + 1);
-            }
 
             return result;
         }
@@ -37,10 +35,8 @@ namespace DnDCombatSimSimple
             Random r = new Random();
             double result = 0;
 
-            for (int i = 1; i <= this.Amount + (slot.Level - spell.Level); i++)
-            {
+            for (int i = 1; i <= this.Amount + (slot.Level - spell.Level); i++) 
                 result += r.Next(1, this.Type + 1);
-            }
 
             return result;
         }

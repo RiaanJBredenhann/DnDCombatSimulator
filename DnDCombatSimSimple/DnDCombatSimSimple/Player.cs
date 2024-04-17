@@ -31,7 +31,7 @@ namespace DnDCombatSimSimple
         //                                             METHODS
         // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 
-        public void UseConsumable(Creature target)
+        public void UseConsumable(Creature target, List<Monster> monsters)
         {
             for (int i = 0; i < this.Consumables.Count; i++)
             {
@@ -53,6 +53,10 @@ namespace DnDCombatSimSimple
                         else Console.WriteLine($"{target.Name} failed the save against the dynamite and took {damageRoll} point(s) of damage");
 
                         target.CurrentHP -= damageRoll;
+
+                        if (target.CurrentHP <= 0)
+                            monsters.Remove((Monster)target);
+
                         break;
                     } else Console.WriteLine($"{this.Name} has no more sticks of dynamite.");
                 }

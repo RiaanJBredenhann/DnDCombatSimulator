@@ -92,13 +92,21 @@ namespace DnDCombatSimSimple
             return (abilityScore - 10) / 2;
         }
 
-        public Creature ChooseTarget(List<Creature> creatures)
+        public Creature ChooseTarget(List<Player> players, List<Monster> monsters)
         {
             Random r = new Random();
-            return creatures[r.Next(0, creatures.Count)];
+
+            if (this.CreatureType == 'P')
+            {
+                return monsters[r.Next(0, monsters.Count)];
+            }
+            else
+            {
+                return players[r.Next(0, players.Count)];
+            }
         }
 
-        public void AttackWithWeapon(Creature target)
+        public void AttackWithWeapon(Creature target, List<Player> players, List<Monster> monsters)
         {
             Random r = new Random();
             Weapon chosenWeapon = this.Weapons[r.Next(0, this.Weapons.Count)];
@@ -128,7 +136,10 @@ namespace DnDCombatSimSimple
 
                 if (target.CurrentHP <= 0)
                 {
-                    target.IsDead = true;
+                    if (target.CreatureType == 'P')
+                        players.Remove((Player)target);
+                    else
+                        monsters.Remove((Monster)target);
                     Console.WriteLine($" killing {target.Name}");
                 }
             }
@@ -137,9 +148,11 @@ namespace DnDCombatSimSimple
                 Console.WriteLine($"{this.Name} rolled a {attackRoll} and missed {target.Name} dealing no damage");
             }
 
+            Console.WriteLine();
+
         }
 
-        public void CastASpell(Creature target)
+        public void CastASpell(Creature target, List<Player> players, List<Monster> monsters)
         {
             Random r = new Random();
 
@@ -171,12 +184,23 @@ namespace DnDCombatSimSimple
                     SavingThrowSpell(target, chosenSpell, chosenSlot, attackModifier);
                 else
                     ArmourClassSpell(target, chosenSpell, chosenSlot, attackModifier);
+
+                if (target.CurrentHP <= 0)
+                {
+                    if (target.CreatureType == 'P')
+                        players.Remove((Player)target);
+                    else
+                        monsters.Remove((Monster)target);
+                    Console.Write($" killing {target.Name}");
+                }
             }
             else
             {
                 Console.WriteLine($"{this.Name} does not have any spell slots left to cast {chosenSpell.Name} and will attack with their weapon");
-                this.AttackWithWeapon(target);
+                this.AttackWithWeapon(target, players, monsters);
             }
+
+            Console.WriteLine();
 
         }
 
@@ -251,6 +275,7 @@ namespace DnDCombatSimSimple
             }
 
             target.CurrentHP -= damageRoll;
+            if (target.CurrentHP <= 0) Console.WriteLine($" killing {target.Name}");
         }
 
         public void ArmourClassSpell(Creature target, Spell chosenSpell, Slot chosenSlot, int attackModifier)
@@ -267,10 +292,9 @@ namespace DnDCombatSimSimple
                     damageRoll *= 2;
                     Console.WriteLine($"{this.Name} landed a critical hit dealing double damage!");
                 }
+
                 target.CurrentHP -= damageRoll;
-
                 Console.Write($"{this.Name} rolled a {attackRoll} and hit {target.Name} dealing {damageRoll} point(s) of damage");
-
                 if (target.CurrentHP <= 0) Console.WriteLine($" killing {target.Name}");
             }
             else

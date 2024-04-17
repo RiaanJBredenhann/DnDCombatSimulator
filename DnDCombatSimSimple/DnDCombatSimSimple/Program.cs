@@ -65,26 +65,31 @@ namespace DnDCombatSimSimple
 
             initiativeOrder = RollInitiative(initiativeOrder);
 
-            Random r = new Random();
+            //Random r = new Random();
 
             foreach (Creature c in initiativeOrder)
             {
-                if (c.CreatureType == 'P')
+                if (c.CurrentHP > 0)
                 {
-                    c.AttackWithWeapon(monsters[r.Next(0, monsters.Count)]);
-                    Console.WriteLine();
-                    c.CastASpell(monsters[r.Next(0, monsters.Count)]);
-                    Console.WriteLine();
+                    if (Creature.RollD20() <= 10)
+                        c.AttackWithWeapon(c.ChooseTarget(players, monsters), players, monsters);
+                    else
+                        c.CastASpell(c.ChooseTarget(players, monsters), players, monsters);
+
+                    if (c.CreatureType == 'P')
+                    {
+                        Player p = (Player)c;
+                        if (p.CurrentHP <= p.MaxHP / 2)
+                            p.UseConsumable();
+                        else
+                            p.UseConsumable(p.ChooseTarget(players, monsters), monsters);
+                    }
                 }
-                else
-                {
-                    c.AttackWithWeapon(players[r.Next(0, players.Count)]);
-                    Console.WriteLine();
-                    c.CastASpell(players[r.Next(0, players.Count)]);
-                    Console.WriteLine();
-                }
-                
+                else Console.WriteLine($"{c.Name} is dead");
             }
+
+            foreach (Creature c in initiativeOrder)
+                Console.WriteLine($"{c.Name} {c.CurrentHP}");
 
 
         }
