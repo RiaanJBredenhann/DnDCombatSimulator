@@ -97,13 +97,9 @@ namespace DnDCombatSimSimple
             Random r = new Random();
 
             if (this.CreatureType == 'P')
-            {
                 return monsters[r.Next(0, monsters.Count)];
-            }
             else
-            {
                 return players[r.Next(0, players.Count)];
-            }
         }
 
         public void AttackWithWeapon(Creature target, List<Player> players, List<Monster> monsters)

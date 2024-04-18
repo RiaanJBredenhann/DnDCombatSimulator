@@ -34,14 +34,12 @@ namespace DnDCombatSimSimple
             consumables.Add(HealingPotion);
             consumables.Add(Dynamite);
 
-
-
-            Player player1 = new Player('P', "Bjorn", 10, 14, 2, 8, 16, 12, 14, 10, 10, spells, spellSlots, "Charisma", weapons, consumables);
-            Player player2 = new Player('P', "Yonaka", 10, 14, 2, 8, 16, 12, 14, 10, 10, spells, spellSlots, "Charisma", weapons, consumables);
-            Player player3 = new Player('P', "Paul", 10, 14, 2, 8, 16, 12, 14, 10, 10, spells, spellSlots, "Charisma", weapons, consumables);
-            Monster monster1 = new Monster('M', "Goblin 1", 1, 5, 14, 2, 12, 14, 10, 8, 6, 7, spells, spellSlots, "Wisdom", weapons);
-            Monster monster2 = new Monster('M', "Goblin 2", 1, 5, 14, 2, 12, 14, 10, 8, 6, 7, spells, spellSlots, "Wisdom", weapons);
-            Monster monster3 = new Monster('M', "Goblin 3", 1, 5, 14, 2, 12, 14, 10, 8, 6, 7, spells, spellSlots, "Wisdom", weapons);
+            Player player1 = new Player('P', "Bjorn", 20, 14, 2, 8, 16, 12, 14, 10, 10, spells, spellSlots, "Charisma", weapons, consumables);
+            Player player2 = new Player('P', "Yonaka", 20, 14, 2, 8, 16, 12, 14, 10, 10, spells, spellSlots, "Charisma", weapons, consumables);
+            Player player3 = new Player('P', "Paul", 20, 14, 2, 8, 16, 12, 14, 10, 10, spells, spellSlots, "Charisma", weapons, consumables);
+            Monster monster1 = new Monster('M', "Goblin 1", 1, 20, 14, 2, 12, 14, 10, 8, 6, 7, spells, spellSlots, "Wisdom", weapons);
+            Monster monster2 = new Monster('M', "Goblin 2", 1, 20, 14, 2, 12, 14, 10, 8, 6, 7, spells, spellSlots, "Wisdom", weapons);
+            Monster monster3 = new Monster('M', "Goblin 3", 1, 20, 14, 2, 12, 14, 10, 8, 6, 7, spells, spellSlots, "Wisdom", weapons);
 
             List<Player> players = new List<Player>();
             List<Monster> monsters = new List<Monster>();
@@ -50,46 +48,87 @@ namespace DnDCombatSimSimple
             players.Add(player1);
             players.Add(player2);
             players.Add(player3);
-
             initiativeOrder.Add(player1);
             initiativeOrder.Add(player2);
             initiativeOrder.Add(player3);
-
             monsters.Add(monster1);
             monsters.Add(monster2);
             monsters.Add(monster3);
-
             initiativeOrder.Add(monster1);
             initiativeOrder.Add(monster2);
             initiativeOrder.Add(monster3);
 
             initiativeOrder = RollInitiative(initiativeOrder);
+            int rounds = 0;
+            int wins = 0;
 
             //Random r = new Random();
 
-            foreach (Creature c in initiativeOrder)
+            for (int i = 1; i <= 3; i++)
             {
-                if (c.CurrentHP > 0)
+                Console.WriteLine($"\nSimulation {i}\n");
+                while (players.Count > 0 && monsters.Count > 0)
                 {
-                    if (Creature.RollD20() <= 10)
-                        c.AttackWithWeapon(c.ChooseTarget(players, monsters), players, monsters);
-                    else
-                        c.CastASpell(c.ChooseTarget(players, monsters), players, monsters);
+                    rounds++;
+                    Console.WriteLine($"\nRound {rounds}\n");
+                    foreach (Creature c in initiativeOrder)
+                    {
+                        if (c.CurrentHP > 0)
+                        {
+                            if (Creature.RollD20() <= 10)
+                                c.AttackWithWeapon(c.ChooseTarget(players, monsters), players, monsters);
+                            else
+                                c.CastASpell(c.ChooseTarget(players, monsters), players, monsters);
 
+                            if (players.Count == 0 || monsters.Count == 0)
+                                break;
+
+                            if (c.CreatureType == 'P')
+                            {
+                                Player p = (Player)c;
+                                if (p.CurrentHP <= p.MaxHP / 2)
+                                    p.UseConsumable();
+                                else
+                                    p.UseConsumable(p.ChooseTarget(players, monsters), monsters);
+                            }
+
+                            if (players.Count == 0 || monsters.Count == 0)
+                                break;
+                        }
+                        else Console.WriteLine($"{c.Name} is dead");
+                    }
+                }
+
+                if (monsters.Count == 0)
+                    wins++;
+
+                players.Clear();
+                monsters.Clear();
+
+                foreach (Creature c in initiativeOrder)
+                {
                     if (c.CreatureType == 'P')
                     {
                         Player p = (Player)c;
-                        if (p.CurrentHP <= p.MaxHP / 2)
-                            p.UseConsumable();
-                        else
-                            p.UseConsumable(p.ChooseTarget(players, monsters), monsters);
+                        p.CurrentHP = p.MaxHP;
+                        p.SpellSlots.Clear();
+                        p.SpellSlots = spellSlots;
+                        p.Consumables.Clear();
+                        p.Consumables = consumables;
+                        players.Add(p);
+                    }
+                    else
+                    {
+                        Monster m = (Monster)c;
+                        m.CurrentHP = m.MaxHP;
+                        m.SpellSlots.Clear();
+                        m.SpellSlots = spellSlots;
+                        monsters.Add(m);
                     }
                 }
-                else Console.WriteLine($"{c.Name} is dead");
             }
 
-            foreach (Creature c in initiativeOrder)
-                Console.WriteLine($"{c.Name} {c.CurrentHP}");
+            Console.WriteLine($"Players won {wins} out of 3 encounters");
 
 
         }

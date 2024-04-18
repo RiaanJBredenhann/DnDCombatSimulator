@@ -75,8 +75,8 @@ namespace DnDCombatSimSimple
                         double healingAmount = this.Consumables[i].DamageDice.CalculateDice();
 
                         Console.WriteLine($"{this.Name} is drinking a {this.Consumables[i].Name} and healed for {healingAmount} hit point(s)");
+                        
                         this.CurrentHP += healingAmount;
-
                         if (this.CurrentHP > this.MaxHP) this.CurrentHP = this.MaxHP;
 
                         break;
