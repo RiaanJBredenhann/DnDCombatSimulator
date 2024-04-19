@@ -136,7 +136,7 @@ namespace DnDCombatSimSimple
                         players.Remove((Player)target);
                     else
                         monsters.Remove((Monster)target);
-                    Console.WriteLine($" killing {target.Name}");
+                    Console.Write($" killing {target.Name}");
                 }
             }
             else
@@ -187,7 +187,7 @@ namespace DnDCombatSimSimple
                         players.Remove((Player)target);
                     else
                         monsters.Remove((Monster)target);
-                    Console.Write($" killing {target.Name}");
+                    Console.WriteLine($" killing {target.Name}");
                 }
             }
             else
@@ -271,7 +271,7 @@ namespace DnDCombatSimSimple
             }
 
             target.CurrentHP -= damageRoll;
-            if (target.CurrentHP <= 0) Console.WriteLine($" killing {target.Name}");
+            //if (target.CurrentHP <= 0) Console.Write($" killing {target.Name}");
         }
 
         public void ArmourClassSpell(Creature target, Spell chosenSpell, Slot chosenSlot, int attackModifier)
@@ -290,8 +290,8 @@ namespace DnDCombatSimSimple
                 }
 
                 target.CurrentHP -= damageRoll;
-                Console.Write($"{this.Name} rolled a {attackRoll} and hit {target.Name} dealing {damageRoll} point(s) of damage");
-                if (target.CurrentHP <= 0) Console.WriteLine($" killing {target.Name}");
+                Console.WriteLine($"{this.Name} rolled a {attackRoll} and hit {target.Name} dealing {damageRoll} point(s) of damage");
+                //if (target.CurrentHP <= 0) Console.Write($" killing {target.Name}");
             }
             else
             {
@@ -305,8 +305,6 @@ namespace DnDCombatSimSimple
             Random r = new Random();
             return r.Next(1, 21);
         }
-
-        
 
     }
 }
