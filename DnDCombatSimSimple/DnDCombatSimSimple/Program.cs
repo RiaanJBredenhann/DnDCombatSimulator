@@ -10,7 +10,9 @@ namespace DnDCombatSimSimple
             Weapon Greataxe = new Weapon("Greataxe", new Dice(2,6), "Heavy");
             Weapon Dagger = new Weapon("Dagger", new Dice(1, 4), "Light");
             Weapon HandCrossbow = new  Weapon("Hand Crossbow", new Dice(1, 6), "Light");
-            Spell Fireball = new Spell("Fireball", 3, new Dice(3, 6), "Save", "Dexterity");
+            Weapon Shortsword = new Weapon("Shortsword", new Dice(1, 6), "Light");
+            Spell Fireball = new Spell("Fireball", 3, new Dice(8, 6), "Save", "Dexterity");
+            Spell ScorchingRay = new Spell("Scorching Ray", 3, new Dice(3, 6), "Armour Class", "None");
             Spell AcidSplash = new Spell("Acid Splash", 0, new Dice(1,6), "Save", "Dexterity");
             Spell FireBolt = new Spell("Fire Bolt", 0, new Dice(1, 6), "Armour Class", "None");
 
@@ -18,14 +20,16 @@ namespace DnDCombatSimSimple
             {
                 Greataxe,
                 Dagger,
-                HandCrossbow
+                HandCrossbow,
+                Shortsword
             };
 
             List<Spell> spells = new List<Spell>
             {
                 Fireball,
                 AcidSplash,
-                FireBolt
+                FireBolt,
+                ScorchingRay
             };
 
             /*List<Slot> spellSlots = new List<Slot>
@@ -43,20 +47,16 @@ namespace DnDCombatSimSimple
                 new Consumable("Dynamite", new Dice(3, 6), 2)
             };*/
 
-            
-
             List<Player> players = new List<Player>();
             List<Monster> monsters = new List<Monster>();
-            //List<Creature> tempCreatures = new List<Creature>();
             List<Creature> initiativeOrder = new List<Creature>();
             
-
-
-
             int rounds;
             int wins = 0;
 
-            //Random r = new Random();
+            Console.WriteLine( "==================================================");
+            Console.WriteLine( "      DUNGEONS & DRAGONS COMBAT SIMULATOR         ");
+            //Console.WriteLine($"==================================================");
 
             for (int i = 1; i <= 100; i++)
             {
@@ -64,71 +64,86 @@ namespace DnDCombatSimSimple
                 monsters.Clear();
                 initiativeOrder.Clear();
 
-                Player player1 = new Player('P', "Bjorn", 11, 14, 2, 8, 16, 12, 14, 10, 10, spells, new List<Slot>
-                {
-                    new Slot(0, 0),
-                    new Slot(1, 1),
-                    new Slot(2, 1),
-                    new Slot(3, 1),
-                    new Slot(4, 1)
-                }, "Charisma", weapons, new List<Consumable>
-                {
-                    new Consumable("Potion of Healing", new Dice(1,4), 2),
-                    new Consumable("Dynamite", new Dice(3, 6), 2)
-                });
+                Player player1 = new Player('P', "Bjorn", 11, 14, 2, 8, 16, 12, 14, 10, 10, RandomizeSpells(spells),
+                    new List<Slot>
+                    {
+                        new Slot(0, 0),
+                        new Slot(1, 1),
+                        new Slot(2, 1),
+                        new Slot(3, 1),
+                        new Slot(4, 1)
+                    }, 
+                    "Charisma", weapons, new List<Consumable>
+                    {
+                        new Consumable("Potion of Healing", new Dice(1,4), 2),
+                        new Consumable("Dynamite", new Dice(3, 6), 2)
+                    }
+                );
 
-                Player player2 = new Player('P', "Yonaka", 12, 14, 2, 8, 16, 12, 14, 10, 10, spells, new List<Slot>
-                {
-                    new Slot(0, 0),
-                    new Slot(1, 1),
-                    new Slot(2, 1),
-                    new Slot(3, 1),
-                    new Slot(4, 1)
-                }, "Charisma", weapons, new List<Consumable>
-                {
-                    new Consumable("Potion of Healing", new Dice(1,4), 2),
-                    new Consumable("Dynamite", new Dice(3, 6), 2)
-                });
+                Player player2 = new Player('P', "Yonaka", 12, 14, 2, 8, 16, 12, 14, 10, 10, RandomizeSpells(spells), 
+                    new List<Slot>
+                    {
+                        new Slot(0, 0),
+                        new Slot(1, 1),
+                        new Slot(2, 1),
+                        new Slot(3, 1),
+                        new Slot(4, 1)
+                    }, 
+                    "Charisma", weapons, new List<Consumable>
+                    {
+                        new Consumable("Potion of Healing", new Dice(1,4), 2),
+                        new Consumable("Dynamite", new Dice(3, 6), 2)
+                    }
+                );
 
-                Player player3 = new Player('P', "Paul", 12, 14, 2, 8, 16, 12, 14, 10, 10, spells, new List<Slot>
-                {
-                    new Slot(0, 0),
-                    new Slot(1, 1),
-                    new Slot(2, 1),
-                    new Slot(3, 1),
-                    new Slot(4, 1)
-                }, "Charisma", weapons, new List<Consumable>
-                {
-                    new Consumable("Potion of Healing", new Dice(1,4), 2),
-                    new Consumable("Dynamite", new Dice(3, 6), 2)
-                });
+                Player player3 = new Player('P', "Paul", 12, 14, 2, 8, 16, 12, 14, 10, 10, RandomizeSpells(spells), 
+                    new List<Slot>
+                    {
+                        new Slot(0, 0),
+                        new Slot(1, 1),
+                        new Slot(2, 1),
+                        new Slot(3, 1),
+                        new Slot(4, 1)
+                    }, 
+                    "Charisma", weapons, new List<Consumable>
+                    {
+                        new Consumable("Potion of Healing", new Dice(1,4), 2),
+                        new Consumable("Dynamite", new Dice(3, 6), 2)
+                    }
+                );
 
-                Monster monster1 = new Monster('M', "Goblin 1", 1, 30, 14, 2, 12, 14, 10, 8, 6, 7, spells, new List<Slot>
-                {
-                    new Slot(0, 0),
-                    new Slot(1, 1),
-                    new Slot(2, 1),
-                    new Slot(3, 1),
-                    new Slot(4, 1)
-                }, "Wisdom", weapons);
+                Monster monster1 = new Monster('M', "Goblin 1", 1, 25, 14, 2, 12, 14, 10, 8, 6, 7, RandomizeSpells(spells), 
+                    new List<Slot>
+                    {
+                        new Slot(0, 0),
+                        new Slot(1, 1),
+                        new Slot(2, 1),
+                        new Slot(3, 1),
+                        new Slot(4, 1)
+                    }, 
+                    "Wisdom", weapons);
 
-                Monster monster2 = new Monster('M', "Goblin 2", 1, 30, 14, 2, 12, 14, 10, 8, 6, 7, spells, new List<Slot>
-                {
-                    new Slot(0, 0),
-                    new Slot(1, 1),
-                    new Slot(2, 1),
-                    new Slot(3, 1),
-                    new Slot(4, 1)
-                }, "Wisdom", weapons);
+                Monster monster2 = new Monster('M', "Goblin 2", 1, 25, 14, 2, 12, 14, 10, 8, 6, 7, RandomizeSpells(spells), 
+                    new List<Slot>
+                    {
+                        new Slot(0, 0),
+                        new Slot(1, 1),
+                        new Slot(2, 1),
+                        new Slot(3, 1),
+                        new Slot(4, 1)
+                    }, 
+                    "Wisdom", weapons);
 
-                Monster monster3 = new Monster('M', "Goblin 3", 1, 30, 14, 2, 12, 14, 10, 8, 6, 7, spells, new List<Slot>
-                {
-                    new Slot(0, 0),
-                    new Slot(1, 1),
-                    new Slot(2, 1),
-                    new Slot(3, 1),
-                    new Slot(4, 1)
-                }, "Wisdom", weapons);
+                Monster monster3 = new Monster('M', "Goblin 3", 1, 25, 14, 2, 12, 14, 10, 8, 6, 7, RandomizeSpells(spells), 
+                    new List<Slot>
+                    {
+                        new Slot(0, 0),
+                        new Slot(1, 1),
+                        new Slot(2, 1),
+                        new Slot(3, 1),
+                        new Slot(4, 1)
+                    }, 
+                    "Wisdom", weapons);
 
                 initiativeOrder.Add(player1);
                 initiativeOrder.Add(player2);
@@ -142,13 +157,11 @@ namespace DnDCombatSimSimple
                     if (c.CreatureType == 'P')
                     {
                         Player p = (Player)c;
-                        //initiativeOrder.Add(p);
                         players.Add(p);
                     }
                     else
                     {
                         Monster m = (Monster)c;
-                        //initiativeOrder.Add(m);
                         monsters.Add(m);
                     }
                 }
@@ -192,10 +205,17 @@ namespace DnDCombatSimSimple
                         }
                         else Console.WriteLine($"{c.Name} is dead");
                     }
+
                 }
 
+                Console.WriteLine();
                 if (monsters.Count == 0)
+                {
                     wins++;
+                    Console.WriteLine("Players won this encounter");
+                }
+                else Console.WriteLine("Monsters won this encounter");
+
             }
 
             Console.WriteLine( "\n==================================================");
@@ -233,6 +253,22 @@ namespace DnDCombatSimSimple
             creatures.Sort((c1, c2) => c2.Initiative.CompareTo(c1.Initiative));
             return creatures;
 
+        }
+
+        public static List<Spell> RandomizeSpells(List<Spell> spells)
+        {
+            Random r = new Random();
+            List<Spell> tempSpells = new List<Spell>();
+            foreach (Spell s in spells)
+            {
+                if (Creature.RollD20() >= 11)
+                    tempSpells.Add(s);
+            }
+
+            if (tempSpells.Count == 0)
+                tempSpells.Add(spells[r.Next(0, spells.Count)]);
+
+            return tempSpells;
         }
 
     }

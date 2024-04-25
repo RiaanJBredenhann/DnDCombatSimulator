@@ -128,7 +128,7 @@ namespace DnDCombatSimSimple
                 }
                 target.CurrentHP -= damageRoll;
 
-                Console.Write($"{this.Name} rolled a {attackRoll} and hit {target.Name} dealing {damageRoll} point(s) of damage");
+                Console.WriteLine($"{this.Name} rolled a {attackRoll} and hit {target.Name} dealing {damageRoll} point(s) of damage");
 
                 if (target.CurrentHP <= 0)
                 {
@@ -187,7 +187,7 @@ namespace DnDCombatSimSimple
                         players.Remove((Player)target);
                     else
                         monsters.Remove((Monster)target);
-                    Console.WriteLine($" killing {target.Name}");
+                    Console.Write($" killing {target.Name}");
                 }
             }
             else
@@ -196,16 +196,14 @@ namespace DnDCombatSimSimple
                 this.AttackWithWeapon(target, players, monsters);
             }
 
-            Console.WriteLine();
+            //Console.WriteLine();
 
         }
 
         public Slot ChooseSpellSlot(Spell chosenSpell)
         {
             if (chosenSpell.Level == 0)
-            {
                 return this.SpellSlots[0];
-            }
             else
             {
                 for (int i = 1; i < this.SpellSlots.Count; i++)
@@ -261,9 +259,7 @@ namespace DnDCombatSimSimple
             }
                 
             if (d20Roll + saveMod < 8 + this.ProficiencyMod + attackModifier)
-            {
                 Console.WriteLine($"{target.Name} failed the save against {chosenSpell.Name} and took {damageRoll} point(s) of damage");
-            }
             else
             {
                 damageRoll = Math.Ceiling(damageRoll/2);
@@ -276,7 +272,6 @@ namespace DnDCombatSimSimple
 
         public void ArmourClassSpell(Creature target, Spell chosenSpell, Slot chosenSlot, int attackModifier)
         {
-            //Random r = new Random();
             int d20Roll = RollD20();
             int attackRoll = d20Roll + this.ProficiencyMod + attackModifier;
 
