@@ -56,9 +56,6 @@ namespace DnDCombatSimSimple
         }
 
 
-        public bool IsDead { get; set; }
-
-
         public Creature(char creatureType, string name, int maxHP, int AC, int profMod, int str, int dex, int con, int wis, int intl, int cha, 
                         List<Spell> spells, List<Slot> slots, string spellcastingAbility, List<Weapon> weapons) 
         { 
@@ -78,7 +75,6 @@ namespace DnDCombatSimSimple
             this.SpellSlots = slots;
             this.SpellcastingAbility = spellcastingAbility;
             this.Weapons = weapons;
-            this.IsDead = false;
         }
 
         public Creature() { }
@@ -87,11 +83,14 @@ namespace DnDCombatSimSimple
         //                                             METHODS
         // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 
+        /* Calculate and return the ability score modifier by taking the ability score as an argument */
         static int CalculateModifier(int abilityScore)
         {
             return (abilityScore - 10) / 2;
         }
 
+        /* Return a random creature of the opposite type depending on the type of creature currently in turn order 
+         * A player creature will choose a random monster creature and vice versa */
         public Creature ChooseTarget(List<Player> players, List<Monster> monsters)
         {
             Random r = new Random();
@@ -102,6 +101,11 @@ namespace DnDCombatSimSimple
                 return players[r.Next(0, players.Count)];
         }
 
+        /* The current creature in turn order will attack the target that was randomly selected with a random weapon in their inventory
+         * First we choose a random weapon from the creature's inventory and calculate the attack and damage modifier
+         *      Heavy weapons us strength and light weapons use dexterity
+         * We then roll the attack and if it hits we roll for damage, other wise we communicate that the attack missed
+         * Finally we check if the target was killed and if so we remove it from its respective list */
         public void AttackWithWeapon(Creature target, List<Player> players, List<Monster> monsters)
         {
             Random r = new Random();
@@ -139,15 +143,14 @@ namespace DnDCombatSimSimple
                     Console.Write($" killing {target.Name}");
                 }
             }
-            else
-            {
-                Console.WriteLine($"{this.Name} rolled a {attackRoll} and missed {target.Name} dealing no damage");
-            }
-
-            Console.WriteLine();
+            else Console.WriteLine($"{this.Name} rolled a {attackRoll} and missed {target.Name} dealing no damage");
 
         }
 
+        /* The current creature in turn order will attack the target that was randomly selected with a random spell in their spell list
+         * First we choose a random spell from the creature's spell list and calculate the attack modifier based on the creature's spellcasting ability
+         * Next we identify what type of spell it is, saveing throw or armour class, and call the appropriate method
+         *  */
         public void CastASpell(Creature target, List<Player> players, List<Monster> monsters)
         {
             Random r = new Random();
@@ -219,6 +222,9 @@ namespace DnDCombatSimSimple
             
         }
 
+        /* Saving throw spells require the target to perfomr a saving throw to decide whether or not the spell affect them
+         * On a save, the spell either does nothing or only deals half damage
+         * On a fail, the spellafflicts the target with a cndition or does full damage */
         public void SavingThrowSpell(Creature target, Spell chosenSpell, Slot chosenSlot, int attackModifier)
         {
             //Random r = new Random();
@@ -267,9 +273,11 @@ namespace DnDCombatSimSimple
             }
 
             target.CurrentHP -= damageRoll;
-            //if (target.CurrentHP <= 0) Console.Write($" killing {target.Name}");
         }
 
+        /* Armour class spell target the target's armour directly, like a weapon attack
+         * If the attack roll is equal to or higher than the target's armour class, the spell hits and deals damage, 
+         * otherwise it misses and deals no damage */
         public void ArmourClassSpell(Creature target, Spell chosenSpell, Slot chosenSlot, int attackModifier)
         {
             int d20Roll = RollD20();
@@ -286,7 +294,6 @@ namespace DnDCombatSimSimple
 
                 target.CurrentHP -= damageRoll;
                 Console.WriteLine($"{this.Name} rolled a {attackRoll} and hit {target.Name} dealing {damageRoll} point(s) of damage");
-                //if (target.CurrentHP <= 0) Console.Write($" killing {target.Name}");
             }
             else
             {
@@ -294,7 +301,8 @@ namespace DnDCombatSimSimple
             }
         }
 
-
+        /* Roll a 20 sided die
+         * Returns a value from 1 to 20 */
         public static int RollD20()
         {
             Random r = new Random();

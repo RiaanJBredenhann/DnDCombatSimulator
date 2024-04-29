@@ -15,7 +15,6 @@ namespace DnDCombatSimSimple
            base(creatureType, name, maxHP, AC, profMod, str, dex, con, wis, intl, cha, spells, slots, spellcastingAbility, weapons)
         {
             this.ID = id;
-            //this.IsDead = false;
         }
 
         public Monster() { }

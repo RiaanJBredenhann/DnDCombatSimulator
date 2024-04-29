@@ -22,7 +22,6 @@ namespace DnDCombatSimSimple
             base(creatureType, name, maxHP, AC, profMod, str, dex, con, wis, intl, cha, spells, slots, spellcastingAbility, weapons)
         {
             this.Consumables = consumables;
-            //this.IsDead = false;
         }
 
         public Player() { }
@@ -31,6 +30,10 @@ namespace DnDCombatSimSimple
         //                                             METHODS
         // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 
+        /* A Player is able to use consumables in their inventory, if they have any
+         * This is an overloaded method that affects the type of consumable used based on the presence of an argument
+         * This method takes two arguments and is used for throwing a stick of dynamite to deal damage to a target
+         * If the target succeeds on the saving throw, the target only receives half damage, otherwise it receives full damage */
         public void UseConsumable(Creature target, List<Monster> monsters)
         {
             for (int i = 0; i < this.Consumables.Count; i++)
@@ -63,6 +66,9 @@ namespace DnDCombatSimSimple
             }
         }
 
+        /* This method takes zero arguments and is used for drinking a healing potion
+         * The Player can use of of their heling potions in their inventory and heal for a rolled amount of hit points, 
+         * not exceeding their max HP */
         public void UseConsumable()
         {
             for (int i = 0; i < this.Consumables.Count; i++)
